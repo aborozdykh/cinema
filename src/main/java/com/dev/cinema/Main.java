@@ -13,6 +13,7 @@ public class Main {
 
         Movie movie = new Movie();
         movie.setTitle("Fast and Furious");
+        movie.setDescription("Description");
         movieService.add(movie);
 
         movieService.getAll().forEach(System.out::println);
