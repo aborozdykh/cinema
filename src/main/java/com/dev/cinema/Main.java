@@ -11,10 +11,14 @@ public class Main {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.getAll().forEach(System.out::println);
 
+        // Add new Movie
         Movie movie = new Movie();
-        movie.setTitle("Fast and Furious");
-        movie.setDescription("Description");
+        movie.setTitle("Phantomas returns");
+        movie.setDescription("The best movie about Phantomas");
         movieService.add(movie);
+
+        Ci
+
 
         movieService.getAll().forEach(System.out::println);
     }
