@@ -45,6 +45,14 @@ public class CinemaHall {
         this.description = description;
     }
 
+    public List<MovieSession> getMovieSessions() {
+        return movieSessions;
+    }
+
+    public void setMovieSessions(List<MovieSession> movieSessions) {
+        this.movieSessions = movieSessions;
+    }
+
     @Override
     public String toString() {
         return "CinemaHall{"

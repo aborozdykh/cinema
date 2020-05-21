@@ -7,5 +7,5 @@ import com.dev.cinema.models.MovieSession;
 public interface MovieSessionDao {
     List<MovieSession> findAvailableSessions(Long movieId, LocalDate date);
 
-    MovieSession add(MovieSession session);
+    MovieSession add(MovieSession movieSession);
 }
