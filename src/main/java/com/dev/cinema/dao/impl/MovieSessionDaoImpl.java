@@ -22,12 +22,12 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             CriteriaBuilder cb = session.getCriteriaBuilder();
             CriteriaQuery<MovieSession> q = cb.createQuery(MovieSession.class);
-            Root<MovieSession> ms = q.from(MovieSession.class);
+            Root<MovieSession> root = q.from(MovieSession.class);
             Predicate predicateForMovieId
-                    = cb.equal(ms.get("movie"), movieId);
+                    = cb.equal(root.get("movie"), movieId);
             LocalDateTime dateTime = date.atStartOfDay();
             Predicate predicateForDate
-                    = cb.between(ms.get("showTime"), dateTime, dateTime.plusDays(1));
+                    = cb.between(root.get("showTime"), dateTime, dateTime.plusDays(1));
             Predicate finalPredicate = cb.or(predicateForMovieId, predicateForDate);
             q.where(finalPredicate);
             return session.createQuery(q).getResultList();
