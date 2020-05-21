@@ -15,10 +15,10 @@ public class Movie {
     private Long id;
 
     @Column(name = "title", nullable = false)
-    private String title = "";
+    private String title;
 
     @Column(name = "description", nullable = false)
-    private String description = "";
+    private String description;
 
     public Movie() {
     }
