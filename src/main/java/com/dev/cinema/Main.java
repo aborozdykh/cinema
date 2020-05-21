@@ -1,8 +1,5 @@
 package com.dev.cinema;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.models.CinemaHall;
 import com.dev.cinema.models.Movie;
@@ -10,6 +7,9 @@ import com.dev.cinema.models.MovieSession;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");

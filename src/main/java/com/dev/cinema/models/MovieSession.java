@@ -14,6 +14,8 @@ public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
     private Movie movie;
 
     @ManyToOne

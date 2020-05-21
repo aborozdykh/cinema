@@ -1,12 +1,17 @@
 package com.dev.cinema.dao.impl;
 
-import java.time.LocalDate;
-import java.util.List;
 import com.dev.cinema.dao.MovieSessionDao;
 import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.models.MovieSession;
 import com.dev.cinema.util.HibernateUtil;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -14,7 +19,21 @@ import org.hibernate.Transaction;
 public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
-        return null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            CriteriaBuilder cb = session.getCriteriaBuilder();
+            CriteriaQuery<MovieSession> q = cb.createQuery(MovieSession.class);
+            Root<MovieSession> ms = q.from(MovieSession.class);
+            Predicate predicateForMovieId
+                    = cb.equal(ms.get("movie"), movieId);
+            LocalDateTime dateTime = date.atStartOfDay();
+            Predicate predicateForDate
+                    = cb.between(ms.get("showTime"), dateTime, dateTime.plusDays(1));
+            Predicate finalPredicate = cb.or(predicateForMovieId, predicateForDate);
+            q.where(finalPredicate);
+            return session.createQuery(q).getResultList();
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't find available sessions", e);
+        }
     }
 
     @Override

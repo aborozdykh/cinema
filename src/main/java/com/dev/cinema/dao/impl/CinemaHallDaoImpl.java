@@ -1,12 +1,12 @@
 package com.dev.cinema.dao.impl;
 
-import java.util.List;
-import javax.persistence.criteria.CriteriaQuery;
 import com.dev.cinema.dao.CinemaHallDao;
 import com.dev.cinema.exceptions.DataProcessingException;
 import com.dev.cinema.lib.Dao;
 import com.dev.cinema.models.CinemaHall;
 import com.dev.cinema.util.HibernateUtil;
+import java.util.List;
+import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -29,7 +29,7 @@ public class CinemaHallDaoImpl implements CinemaHallDao {
             }
             throw new DataProcessingException("Can't add CinemaHall entity", e);
         } finally {
-            if(session != null){
+            if (session != null) {
                 session.close();
             }
         }

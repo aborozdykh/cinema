@@ -1,6 +1,5 @@
 package com.dev.cinema.models;
 
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,8 +14,6 @@ public class CinemaHall {
     private Long id;
     private int capacity;
     private String description;
-
-    private List<MovieSession> movieSessions;
 
     public CinemaHall() {
     }
@@ -43,14 +40,6 @@ public class CinemaHall {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<MovieSession> getMovieSessions() {
-        return movieSessions;
-    }
-
-    public void setMovieSessions(List<MovieSession> movieSessions) {
-        this.movieSessions = movieSessions;
     }
 
     @Override
