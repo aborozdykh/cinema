@@ -12,8 +12,9 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-        <mapping class="com.dev.cinema.models.Movie" />
-        <mapping class="com.dev.cinema.models.CinemaHall" />
-        <mapping class="com.dev.cinema.models.MovieSession" />
+        <mapping class="com.dev.cinema.models.User"/>
+        <mapping class="com.dev.cinema.models.Movie"/>
+        <mapping class="com.dev.cinema.models.CinemaHall"/>
+        <mapping class="com.dev.cinema.models.MovieSession"/>
     </session-factory>
 </hibernate-configuration>
