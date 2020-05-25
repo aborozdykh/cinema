@@ -1,12 +1,18 @@
 package com.dev.cinema;
 
+import static com.dev.cinema.util.HashUtil.getSalt;
+import static com.dev.cinema.util.HashUtil.hashPassword;
+
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.models.CinemaHall;
 import com.dev.cinema.models.Movie;
 import com.dev.cinema.models.MovieSession;
+import com.dev.cinema.models.User;
+import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -45,5 +51,19 @@ public class Main {
 
         movieSessionService.findAvailableSessions(movie.getId(), LocalDate.now())
                 .forEach(System.out::println);
+
+        //Add a new User
+        AuthenticationService authenticationService
+                = (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        var user = authenticationService.register("aborozdykh@gmail.com", "CoolPassword1_!");
+        UserService userService = (UserService) injector.getInstance(UserService.class);
+        userService.add(user);
+        System.out.println(userService.findByEmail("aborozdykh@gmail.com"));
+
+
+
+
+
+
     }
 }
