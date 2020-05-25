@@ -1,11 +1,11 @@
 package me.aborozdykh.cinema.service.impl;
 
+import java.util.Optional;
 import me.aborozdykh.cinema.dao.UserDao;
 import me.aborozdykh.cinema.lib.Inject;
 import me.aborozdykh.cinema.lib.Service;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.service.UserService;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {

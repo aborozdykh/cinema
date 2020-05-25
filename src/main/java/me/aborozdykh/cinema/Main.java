@@ -1,18 +1,18 @@
 package me.aborozdykh.cinema;
 
-import me.aborozdykh.cinema.lib.Injector;
-import me.aborozdykh.cinema.models.Movie;
-import me.aborozdykh.cinema.service.MovieService;
-import me.aborozdykh.cinema.exceptions.AuthenticationException;
-import me.aborozdykh.cinema.models.CinemaHall;
-import me.aborozdykh.cinema.models.MovieSession;
-import me.aborozdykh.cinema.security.AuthenticationService;
-import me.aborozdykh.cinema.service.CinemaHallService;
-import me.aborozdykh.cinema.service.MovieSessionService;
-import me.aborozdykh.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import me.aborozdykh.cinema.exceptions.AuthenticationException;
+import me.aborozdykh.cinema.lib.Injector;
+import me.aborozdykh.cinema.models.CinemaHall;
+import me.aborozdykh.cinema.models.Movie;
+import me.aborozdykh.cinema.models.MovieSession;
+import me.aborozdykh.cinema.security.AuthenticationService;
+import me.aborozdykh.cinema.service.CinemaHallService;
+import me.aborozdykh.cinema.service.MovieService;
+import me.aborozdykh.cinema.service.MovieSessionService;
+import me.aborozdykh.cinema.service.UserService;
 
 public class Main {
     private static Injector injector = Injector.getInstance("me.aborozdykh.cinema");
@@ -57,7 +57,8 @@ public class Main {
         UserService userService = (UserService) injector.getInstance(UserService.class);
         userService.add(user);
         System.out.println("User findByEmail: " + userService.findByEmail("aborozdykh@gmail.com"));
-        System.out.println("User findByEmail with wrong email: " + userService.findByEmail("test@gmail.com"));
+        System.out.println("User findByEmail with wrong email: "
+                + userService.findByEmail("test@gmail.com"));
 
         //Try to login
         var userWithCorrectLoginAndPassword

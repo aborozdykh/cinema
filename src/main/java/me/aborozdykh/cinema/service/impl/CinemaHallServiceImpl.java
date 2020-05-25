@@ -1,11 +1,11 @@
 package me.aborozdykh.cinema.service.impl;
 
+import java.util.List;
 import me.aborozdykh.cinema.dao.CinemaHallDao;
 import me.aborozdykh.cinema.lib.Inject;
 import me.aborozdykh.cinema.lib.Service;
 import me.aborozdykh.cinema.models.CinemaHall;
 import me.aborozdykh.cinema.service.CinemaHallService;
-import java.util.List;
 
 @Service
 public class CinemaHallServiceImpl implements CinemaHallService {
