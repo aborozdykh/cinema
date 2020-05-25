@@ -44,7 +44,7 @@ public class UserDaoImpl implements UserDao {
             Root<User> userRoot = query.from(User.class);
             query.select(userRoot)
                     .where(cb.like(userRoot.get("email"), email));
-            return Optional.of(session.createQuery(query).getSingleResult());
+            return session.createQuery(query).uniqueResultOptional();
         } catch (Exception e) {
             throw new DataProcessingException("Can't find user with login " + email, e);
         }

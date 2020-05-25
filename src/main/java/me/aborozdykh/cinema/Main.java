@@ -57,6 +57,7 @@ public class Main {
         UserService userService = (UserService) injector.getInstance(UserService.class);
         userService.add(user);
         System.out.println("User findByEmail: " + userService.findByEmail("aborozdykh@gmail.com"));
+        System.out.println("User findByEmail with wrong email: " + userService.findByEmail("test@gmail.com"));
 
         //Try to login
         var userWithCorrectLoginAndPassword
