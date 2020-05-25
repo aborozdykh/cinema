@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import me.aborozdykh.cinema.exceptions.AuthenticationException;
-import org.apache.log4j.Logger;
 
 public class HashUtil {
     private static final String ALGORITHM = "SHA-512";

@@ -1,10 +1,10 @@
 package me.aborozdykh.cinema.dao.impl;
 
 import me.aborozdykh.cinema.dao.UserDao;
-import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.lib.Dao;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.util.HibernateUtil;
+import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import java.util.Optional;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;

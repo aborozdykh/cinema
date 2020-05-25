@@ -1,13 +1,13 @@
 package me.aborozdykh.cinema;
 
-import me.aborozdykh.cinema.exceptions.AuthenticationException;
 import me.aborozdykh.cinema.lib.Injector;
-import me.aborozdykh.cinema.models.CinemaHall;
 import me.aborozdykh.cinema.models.Movie;
+import me.aborozdykh.cinema.service.MovieService;
+import me.aborozdykh.cinema.exceptions.AuthenticationException;
+import me.aborozdykh.cinema.models.CinemaHall;
 import me.aborozdykh.cinema.models.MovieSession;
 import me.aborozdykh.cinema.security.AuthenticationService;
 import me.aborozdykh.cinema.service.CinemaHallService;
-import me.aborozdykh.cinema.service.MovieService;
 import me.aborozdykh.cinema.service.MovieSessionService;
 import me.aborozdykh.cinema.service.UserService;
 import java.time.LocalDate;

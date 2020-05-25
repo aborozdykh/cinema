@@ -1,12 +1,12 @@
 package me.aborozdykh.cinema.security.impl;
 
-import me.aborozdykh.cinema.exceptions.AuthenticationException;
 import me.aborozdykh.cinema.lib.Inject;
 import me.aborozdykh.cinema.lib.Service;
 import me.aborozdykh.cinema.models.User;
+import me.aborozdykh.cinema.util.HashUtil;
+import me.aborozdykh.cinema.exceptions.AuthenticationException;
 import me.aborozdykh.cinema.security.AuthenticationService;
 import me.aborozdykh.cinema.service.UserService;
-import me.aborozdykh.cinema.util.HashUtil;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {

@@ -1,10 +1,10 @@
 package me.aborozdykh.cinema.dao.impl;
 
-import me.aborozdykh.cinema.dao.MovieSessionDao;
-import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.lib.Dao;
 import me.aborozdykh.cinema.models.MovieSession;
 import me.aborozdykh.cinema.util.HibernateUtil;
+import me.aborozdykh.cinema.dao.MovieSessionDao;
+import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
