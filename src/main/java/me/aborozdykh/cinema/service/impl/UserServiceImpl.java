@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public Optional<User> add(User user) {
+    public User add(User user) {
         return userDao.add(user);
     }
 

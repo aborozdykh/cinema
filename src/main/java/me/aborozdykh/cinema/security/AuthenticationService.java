@@ -13,5 +13,5 @@ public interface AuthenticationService {
      * @param password - user password
      * @return new user instance
      */
-    User register(String email, String password);
+    User register(String email, String password) throws AuthenticationException;
 }

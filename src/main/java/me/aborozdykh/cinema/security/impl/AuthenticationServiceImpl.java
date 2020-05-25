@@ -17,8 +17,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
-        var user = userService.findByEmail(email).orElseThrow(() ->
-                new AuthenticationException(INCORRECT_LOGIN_OR_PASSWORD));
+        var user = userService.findByEmail(email).orElseThrow();
         if (user.getPassword().equals(HashUtil.hashPassword(password, user.getSalt()))) {
             return user;
         }
@@ -26,7 +25,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User register(String email, String password) {
+    public User register(String email, String password) throws AuthenticationException {
         var user = new User();
         user.setEmail(email);
         byte[] salt = HashUtil.getSalt();
