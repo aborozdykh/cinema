@@ -52,17 +52,17 @@ public class Main {
         //Add a new User
         AuthenticationService authenticationService
                 = (AuthenticationService) injector.getInstance(AuthenticationService.class);
-        var user = authenticationService.register("aborozdykh@gmail.com", "CoolPassword1_!");
-        var user2 = authenticationService.register("aborozdykh@gmail.com", "CoolPassword1_!");
+        var user = authenticationService.register("order@cinema.com.ua", "CoolPassword1_!");
+        var user2 = authenticationService.register("order@cinema.com.ua", "CoolPassword1_!");
         UserService userService = (UserService) injector.getInstance(UserService.class);
         userService.add(user);
-        System.out.println("User findByEmail: " + userService.findByEmail("aborozdykh@gmail.com"));
+        System.out.println("User findByEmail: " + userService.findByEmail("order@cinema.com.ua"));
         System.out.println("User findByEmail with wrong email: "
                 + userService.findByEmail("test@gmail.com"));
 
         //Try to login
         var userWithCorrectLoginAndPassword
-                = authenticationService.login("aborozdykh@gmail.com", "CoolPassword1_!");
+                = authenticationService.login("order@cinema.com.ua", "CoolPassword1_!");
         System.out.println("User with correct login and password: "
                 + userWithCorrectLoginAndPassword);
     }
