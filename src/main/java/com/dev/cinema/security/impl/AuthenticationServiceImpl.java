@@ -3,21 +3,28 @@ package com.dev.cinema.security.impl;
 import static com.dev.cinema.util.HashUtil.getSalt;
 import static com.dev.cinema.util.HashUtil.hashPassword;
 
-import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.lib.Inject;
 import com.dev.cinema.lib.Service;
 import com.dev.cinema.models.User;
 import com.dev.cinema.security.AuthenticationService;
+import com.dev.cinema.service.UserService;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
+    private static final String INCORRECT_LOGIN_OR_PASSWORD = "Enter valid login and password.";
+
     @Inject
-    private UserDao userDao;
+    private UserService userService;
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
-        return null;
+        var user = userService.findByEmail(email).orElseThrow(() ->
+                new AuthenticationException(INCORRECT_LOGIN_OR_PASSWORD));
+        if (user.getPassword().equals(hashPassword(password, user.getSalt()))) {
+            return user;
+        }
+        throw new AuthenticationException(INCORRECT_LOGIN_OR_PASSWORD);
     }
 
     @Override

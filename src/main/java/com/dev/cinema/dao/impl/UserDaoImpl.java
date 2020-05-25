@@ -20,9 +20,8 @@ public class UserDaoImpl implements UserDao {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
-            var userId = (Long) session.save(user);
+            session.save(user);
             transaction.commit();
-            user.setId(userId);
             return Optional.ofNullable(user);
         } catch (Exception e) {
             if (transaction != null) {

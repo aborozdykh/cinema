@@ -1,13 +1,10 @@
 package com.dev.cinema;
 
-import static com.dev.cinema.util.HashUtil.getSalt;
-import static com.dev.cinema.util.HashUtil.hashPassword;
-
+import com.dev.cinema.exceptions.AuthenticationException;
 import com.dev.cinema.lib.Injector;
 import com.dev.cinema.models.CinemaHall;
 import com.dev.cinema.models.Movie;
 import com.dev.cinema.models.MovieSession;
-import com.dev.cinema.models.User;
 import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
@@ -20,7 +17,7 @@ import java.time.LocalTime;
 public class Main {
     private static Injector injector = Injector.getInstance("com.dev.cinema");
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AuthenticationException {
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movieService.getAll().forEach(System.out::println);
 
@@ -56,14 +53,15 @@ public class Main {
         AuthenticationService authenticationService
                 = (AuthenticationService) injector.getInstance(AuthenticationService.class);
         var user = authenticationService.register("aborozdykh@gmail.com", "CoolPassword1_!");
+        var user2 = authenticationService.register("aborozdykh@gmail.com", "CoolPassword1_!");
         UserService userService = (UserService) injector.getInstance(UserService.class);
         userService.add(user);
-        System.out.println(userService.findByEmail("aborozdykh@gmail.com"));
+        System.out.println("User findByEmail: " + userService.findByEmail("aborozdykh@gmail.com"));
 
-
-
-
-
-
+        //Try to login
+        var userWithCorrectLoginAndPassword
+                = authenticationService.login("aborozdykh@gmail.com", "CoolPassword1_!");
+        System.out.println("User with correct login and password: "
+                + userWithCorrectLoginAndPassword);
     }
 }
