@@ -5,15 +5,16 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cinema?serverTimezone=UTC</property>
         <property name="hibernate.connection.username">internetshop</property>
         <property name="hibernate.connection.password">Qwerty1@</property>
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
-        <mapping class="com.dev.cinema.models.Movie" />
-        <mapping class="com.dev.cinema.models.CinemaHall" />
-        <mapping class="com.dev.cinema.models.MovieSession" />
+        <mapping class="me.aborozdykh.cinema.models.User"/>
+        <mapping class="me.aborozdykh.cinema.models.Movie"/>
+        <mapping class="me.aborozdykh.cinema.models.CinemaHall"/>
+        <mapping class="me.aborozdykh.cinema.models.MovieSession"/>
     </session-factory>
 </hibernate-configuration>
