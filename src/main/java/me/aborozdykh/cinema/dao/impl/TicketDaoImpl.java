@@ -2,11 +2,13 @@ package me.aborozdykh.cinema.dao.impl;
 
 import me.aborozdykh.cinema.dao.TicketDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
+import me.aborozdykh.cinema.lib.Dao;
 import me.aborozdykh.cinema.models.Ticket;
 import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+@Dao
 public class TicketDaoImpl implements TicketDao {
     @Override
     public Ticket add(Ticket ticket) {

@@ -12,9 +12,11 @@
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">create-drop</property>
 
+        <mapping class="me.aborozdykh.cinema.models.CinemaHall"/>
         <mapping class="me.aborozdykh.cinema.models.User"/>
         <mapping class="me.aborozdykh.cinema.models.Movie"/>
-        <mapping class="me.aborozdykh.cinema.models.CinemaHall"/>
         <mapping class="me.aborozdykh.cinema.models.MovieSession"/>
+        <mapping class="me.aborozdykh.cinema.models.ShoppingCart"/>
+        <mapping class="me.aborozdykh.cinema.models.Ticket"/>
     </session-factory>
 </hibernate-configuration>
