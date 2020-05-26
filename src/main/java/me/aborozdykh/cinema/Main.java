@@ -8,10 +8,12 @@ import me.aborozdykh.cinema.lib.Injector;
 import me.aborozdykh.cinema.models.CinemaHall;
 import me.aborozdykh.cinema.models.Movie;
 import me.aborozdykh.cinema.models.MovieSession;
+import me.aborozdykh.cinema.models.ShoppingCart;
 import me.aborozdykh.cinema.security.AuthenticationService;
 import me.aborozdykh.cinema.service.CinemaHallService;
 import me.aborozdykh.cinema.service.MovieService;
 import me.aborozdykh.cinema.service.MovieSessionService;
+import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
 
 public class Main {
@@ -52,13 +54,17 @@ public class Main {
         //Add a new User
         AuthenticationService authenticationService
                 = (AuthenticationService) injector.getInstance(AuthenticationService.class);
-        var user = authenticationService.register("order@cinema.com.ua", "CoolPassword1_!");
-        var user2 = authenticationService.register("order@cinema.com.ua", "CoolPassword1_!");
         UserService userService = (UserService) injector.getInstance(UserService.class);
-        userService.add(user);
+        ShoppingCartService shoppingCartService
+                = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        var user = authenticationService.register("order@cinema.com.ua", "CoolPassword1_!");
         System.out.println("User findByEmail: " + userService.findByEmail("order@cinema.com.ua"));
         System.out.println("User findByEmail with wrong email: "
                 + userService.findByEmail("test@gmail.com"));
+        //Add ticket
+        shoppingCartService.addSession(movieSession, user);
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(user);
+        System.out.println(shoppingCart);
 
         //Try to login
         var userWithCorrectLoginAndPassword

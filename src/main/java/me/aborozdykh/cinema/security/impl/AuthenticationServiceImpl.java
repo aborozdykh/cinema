@@ -5,6 +5,7 @@ import me.aborozdykh.cinema.lib.Inject;
 import me.aborozdykh.cinema.lib.Service;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.security.AuthenticationService;
+import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
 import me.aborozdykh.cinema.util.HashUtil;
 
@@ -14,6 +15,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Inject
     private UserService userService;
+
+    @Inject
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
@@ -32,6 +36,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         user.setSalt(salt);
         String hashPassword = HashUtil.hashPassword(password, salt);
         user.setPassword(hashPassword);
-        return user;
+        var userFromDb = userService.add(user);
+        shoppingCartService.registerNewShoppingCart(userFromDb);
+        return userFromDb;
     }
 }
