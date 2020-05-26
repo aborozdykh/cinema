@@ -1,6 +1,5 @@
 package me.aborozdykh.cinema.models;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +23,6 @@ public class ShoppingCart {
     @MapsId
     @JoinColumn(name = "id")
     private User user;
-    private LocalDateTime orderDate;
 
     public ShoppingCart() {
     }
@@ -45,14 +43,6 @@ public class ShoppingCart {
         this.tickets = tickets;
     }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
-    }
-
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
     public User getUser() {
         return user;
     }
@@ -66,7 +56,6 @@ public class ShoppingCart {
         return "ShoppingCart{"
                 + "id=" + id
                 + ", tickets=" + tickets
-                + ", orderDate=" + orderDate
                 + ", user=" + user
                 + '}';
     }

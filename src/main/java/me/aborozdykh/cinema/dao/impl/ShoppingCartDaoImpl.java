@@ -1,5 +1,8 @@
 package me.aborozdykh.cinema.dao.impl;
 
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
 import me.aborozdykh.cinema.dao.ShoppingCartDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.lib.Dao;
@@ -8,8 +11,6 @@ import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
@@ -40,8 +41,11 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     public ShoppingCart getByUser(User user) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             var cb = session.getCriteriaBuilder();
-            CriteriaQuery<ShoppingCart> shoppingCartCriteriaQuery = cb.createQuery(ShoppingCart.class);
-            Root<ShoppingCart> shoppingCartRoot = shoppingCartCriteriaQuery.from(ShoppingCart.class);
+            CriteriaQuery<ShoppingCart> shoppingCartCriteriaQuery
+                    = cb.createQuery(ShoppingCart.class);
+            Root<ShoppingCart> shoppingCartRoot
+                    = shoppingCartCriteriaQuery.from(ShoppingCart.class);
+            shoppingCartRoot.fetch("tickets", JoinType.LEFT);
             var predicateByUser = cb.equal(shoppingCartRoot.get("user"), user.getId());
             shoppingCartCriteriaQuery.where(predicateByUser);
             return session.createQuery(shoppingCartCriteriaQuery).uniqueResult();
