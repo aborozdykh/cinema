@@ -16,6 +16,7 @@
         <mapping class="me.aborozdykh.cinema.models.User"/>
         <mapping class="me.aborozdykh.cinema.models.Movie"/>
         <mapping class="me.aborozdykh.cinema.models.MovieSession"/>
+        <mapping class="me.aborozdykh.cinema.models.Order"/>
         <mapping class="me.aborozdykh.cinema.models.ShoppingCart"/>
         <mapping class="me.aborozdykh.cinema.models.Ticket"/>
     </session-factory>

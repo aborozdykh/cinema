@@ -1,18 +1,17 @@
 package me.aborozdykh.cinema.dao.impl;
 
-import me.aborozdykh.cinema.dao.OrderDao;
-import me.aborozdykh.cinema.exceptions.DataProcessingException;
-import me.aborozdykh.cinema.lib.Dao;
-import me.aborozdykh.cinema.models.Order;
-import me.aborozdykh.cinema.models.ShoppingCart;
-import me.aborozdykh.cinema.models.User;
-import me.aborozdykh.cinema.util.HibernateUtil;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
+import me.aborozdykh.cinema.dao.OrderDao;
+import me.aborozdykh.cinema.exceptions.DataProcessingException;
+import me.aborozdykh.cinema.lib.Dao;
+import me.aborozdykh.cinema.models.Order;
+import me.aborozdykh.cinema.models.User;
+import me.aborozdykh.cinema.util.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 @Dao
 public class OrderDaoImpl implements OrderDao {
