@@ -71,5 +71,8 @@ public class Main {
                 = authenticationService.login("order@cinema.com.ua", "CoolPassword1_!");
         System.out.println("User with correct login and password: "
                 + userWithCorrectLoginAndPassword);
+
+        //Add Order
+
     }
 }
