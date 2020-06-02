@@ -8,7 +8,6 @@ import me.aborozdykh.cinema.security.AuthenticationService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
 import me.aborozdykh.cinema.util.HashUtilService;
-import me.aborozdykh.cinema.util.impl.HashUtil;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -26,7 +25,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public AuthenticationServiceImpl() {
     }
 
-    public AuthenticationServiceImpl(UserService userService, ShoppingCartService shoppingCartService, HashUtilService hashUtilService) {
+    public AuthenticationServiceImpl(UserService userService,
+                                     ShoppingCartService shoppingCartService,
+                                     HashUtilService hashUtilService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
         this.hashUtilService = hashUtilService;
