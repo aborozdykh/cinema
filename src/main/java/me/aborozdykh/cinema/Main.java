@@ -13,6 +13,7 @@ import me.aborozdykh.cinema.security.AuthenticationService;
 import me.aborozdykh.cinema.service.CinemaHallService;
 import me.aborozdykh.cinema.service.MovieService;
 import me.aborozdykh.cinema.service.MovieSessionService;
+import me.aborozdykh.cinema.service.OrderService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
 
@@ -71,5 +72,12 @@ public class Main {
                 = authenticationService.login("order@cinema.com.ua", "CoolPassword1_!");
         System.out.println("User with correct login and password: "
                 + userWithCorrectLoginAndPassword);
+
+        //Add Order
+        System.out.println("_____________________________________________________________");
+        OrderService orderService
+                = (OrderService) injector.getInstance(OrderService.class);
+        orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser());
+        orderService.getOrderHistory(user).forEach(System.out::println);
     }
 }
