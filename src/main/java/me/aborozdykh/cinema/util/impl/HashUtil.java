@@ -1,21 +1,24 @@
-package me.aborozdykh.cinema.util;
+package me.aborozdykh.cinema.util.impl;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import me.aborozdykh.cinema.exceptions.AuthenticationException;
+import me.aborozdykh.cinema.lib.Service;
+import me.aborozdykh.cinema.util.HashUtilService;
 
-public class HashUtil {
+@Service
+public class HashUtil implements HashUtilService {
     private static final String ALGORITHM = "SHA-512";
 
-    public static byte[] getSalt() {
+    public byte[] getSalt() {
         SecureRandom secureRandom = new SecureRandom();
         byte[] salt = new byte[16];
         secureRandom.nextBytes(salt);
         return salt;
     }
 
-    public static String hashPassword(String password, byte[] salt) throws AuthenticationException {
+    public String hashPassword(String password, byte[] salt) throws AuthenticationException {
         StringBuilder hashedPassword = new StringBuilder();
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(ALGORITHM);

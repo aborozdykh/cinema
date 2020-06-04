@@ -7,7 +7,7 @@ import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.security.AuthenticationService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
-import me.aborozdykh.cinema.util.HashUtil;
+import me.aborozdykh.cinema.util.HashUtilService;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -19,10 +19,24 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private ShoppingCartService shoppingCartService;
 
+    @Inject
+    private HashUtilService hashUtilService;
+
+    public AuthenticationServiceImpl() {
+    }
+
+    public AuthenticationServiceImpl(UserService userService,
+                                     ShoppingCartService shoppingCartService,
+                                     HashUtilService hashUtilService) {
+        this.userService = userService;
+        this.shoppingCartService = shoppingCartService;
+        this.hashUtilService = hashUtilService;
+    }
+
     @Override
     public User login(String email, String password) throws AuthenticationException {
         var user = userService.findByEmail(email).orElseThrow();
-        if (user.getPassword().equals(HashUtil.hashPassword(password, user.getSalt()))) {
+        if (user.getPassword().equals(hashUtilService.hashPassword(password, user.getSalt()))) {
             return user;
         }
         throw new AuthenticationException(INCORRECT_LOGIN_OR_PASSWORD);
@@ -32,9 +46,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public User register(String email, String password) throws AuthenticationException {
         var user = new User();
         user.setEmail(email);
-        byte[] salt = HashUtil.getSalt();
+        byte[] salt = hashUtilService.getSalt();
         user.setSalt(salt);
-        String hashPassword = HashUtil.hashPassword(password, salt);
+        String hashPassword = hashUtilService.hashPassword(password, salt);
         user.setPassword(hashPassword);
         var userFromDb = userService.add(user);
         shoppingCartService.registerNewShoppingCart(userFromDb);
