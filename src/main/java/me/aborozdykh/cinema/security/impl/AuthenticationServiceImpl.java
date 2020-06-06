@@ -11,13 +11,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private final String INCORRECT_LOGIN_OR_PASSWORD = "Enter valid login and password.";
+    private final String incorrectLoginOrPassword = "Enter valid login and password.";
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
     private final HashUtilService hashUtilService;
 
     @Autowired
-    public AuthenticationServiceImpl(UserService userService, ShoppingCartService shoppingCartService, HashUtilService hashUtilService) {
+    public AuthenticationServiceImpl(
+            UserService userService,
+            ShoppingCartService shoppingCartService,
+            HashUtilService hashUtilService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
         this.hashUtilService = hashUtilService;
@@ -29,7 +32,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (user.getPassword().equals(hashUtilService.hashPassword(password, user.getSalt()))) {
             return user;
         }
-        throw new AuthenticationException(INCORRECT_LOGIN_OR_PASSWORD);
+        throw new AuthenticationException(incorrectLoginOrPassword);
     }
 
     @Override
