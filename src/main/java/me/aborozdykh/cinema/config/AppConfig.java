@@ -22,7 +22,12 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
  * @author Andrii Borozdykh created on 06.06.2020
  */
 @Configuration
-@ComponentScan("me.aborozdykh.cinema")
+@ComponentScan(basePackages = {
+        "me.aborozdykh.cinema.service",
+        "me.aborozdykh.cinema.dao",
+        "me.aborozdykh.cinema.security",
+        "me.aborozdykh.cinema.util"
+})
 @PropertySource("classpath:db.properties")
 public class AppConfig {
     private final Environment environment;
@@ -52,13 +57,15 @@ public class AppConfig {
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
 
         factoryBean.setHibernateProperties(properties);
-        factoryBean.setAnnotatedClasses(CinemaHall.class);
-        factoryBean.setAnnotatedClasses(Movie.class);
-        factoryBean.setAnnotatedClasses(MovieSession.class);
-        factoryBean.setAnnotatedClasses(Order.class);
-        factoryBean.setAnnotatedClasses(ShoppingCart.class);
-        factoryBean.setAnnotatedClasses(Ticket.class);
-        factoryBean.setAnnotatedClasses(User.class);
+
+        factoryBean.setAnnotatedClasses(
+                CinemaHall.class,
+                Movie.class,
+                MovieSession.class,
+                Order.class,
+                ShoppingCart.class,
+                Ticket.class,
+                User.class);
         return factoryBean;
     }
 
