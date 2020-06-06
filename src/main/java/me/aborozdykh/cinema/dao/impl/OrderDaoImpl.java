@@ -15,34 +15,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderDaoImpl implements OrderDao {
+public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
     private final SessionFactory sessionFactory;
 
     @Autowired
     public OrderDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
         this.sessionFactory = sessionFactory;
     }
 
     @Override
     public Order add(Order order) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            session.save(order);
-            transaction.commit();
-            return order;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't add order entity " + order, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        return addEntity(order);
     }
 
     @Override

@@ -7,39 +7,22 @@ import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.models.Movie;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MovieDaoImpl implements MovieDao {
+public class MovieDaoImpl extends GenericDaoImpl<Movie> implements MovieDao {
     private final SessionFactory sessionFactory;
 
     @Autowired
     public MovieDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
         this.sessionFactory = sessionFactory;
     }
 
     @Override
     public Movie add(Movie movie) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            session.save(movie);
-            transaction.commit();
-            return movie;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't add Movie entity", e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+        return addEntity(movie);
     }
 
     @Override

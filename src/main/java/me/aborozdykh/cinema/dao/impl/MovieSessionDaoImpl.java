@@ -9,17 +9,22 @@ import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.models.MovieSession;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MovieSessionDaoImpl implements MovieSessionDao {
+public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements MovieSessionDao {
     private final SessionFactory sessionFactory;
 
     @Autowired
     public MovieSessionDaoImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
         this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public MovieSession add(MovieSession movieSession) {
+        return addEntity(movieSession);
     }
 
     @Override
@@ -38,28 +43,6 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             return session.createQuery(q).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't find available sessions", e);
-        }
-    }
-
-    @Override
-    public MovieSession add(MovieSession movieSession) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            session.save(movieSession);
-            transaction.commit();
-            return movieSession;
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't add MovieSession entity", e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
         }
     }
 }
