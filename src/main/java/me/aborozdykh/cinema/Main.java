@@ -74,5 +74,7 @@ public class Main {
         var orderService = context.getBean(OrderService.class);
         orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser());
         orderService.getOrderHistory(user).forEach(System.out::println);
+
+        context.close();
     }
 }
