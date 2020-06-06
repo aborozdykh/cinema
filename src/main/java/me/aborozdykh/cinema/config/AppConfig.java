@@ -53,12 +53,12 @@ public class AppConfig {
 
         factoryBean.setHibernateProperties(properties);
         factoryBean.setAnnotatedClasses(CinemaHall.class);
-        factoryBean.setAnnotatedClasses(User.class);
         factoryBean.setAnnotatedClasses(Movie.class);
         factoryBean.setAnnotatedClasses(MovieSession.class);
         factoryBean.setAnnotatedClasses(Order.class);
         factoryBean.setAnnotatedClasses(ShoppingCart.class);
         factoryBean.setAnnotatedClasses(Ticket.class);
+        factoryBean.setAnnotatedClasses(User.class);
         return factoryBean;
     }
 

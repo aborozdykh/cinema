@@ -1,33 +1,23 @@
 package me.aborozdykh.cinema.security.impl;
 
 import me.aborozdykh.cinema.exceptions.AuthenticationException;
-import me.aborozdykh.cinema.lib.Inject;
-import me.aborozdykh.cinema.lib.Service;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.security.AuthenticationService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
 import me.aborozdykh.cinema.util.HashUtilService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private static final String INCORRECT_LOGIN_OR_PASSWORD = "Enter valid login and password.";
+    private final String INCORRECT_LOGIN_OR_PASSWORD = "Enter valid login and password.";
+    private final UserService userService;
+    private final ShoppingCartService shoppingCartService;
+    private final HashUtilService hashUtilService;
 
-    @Inject
-    private UserService userService;
-
-    @Inject
-    private ShoppingCartService shoppingCartService;
-
-    @Inject
-    private HashUtilService hashUtilService;
-
-    public AuthenticationServiceImpl() {
-    }
-
-    public AuthenticationServiceImpl(UserService userService,
-                                     ShoppingCartService shoppingCartService,
-                                     HashUtilService hashUtilService) {
+    @Autowired
+    public AuthenticationServiceImpl(UserService userService, ShoppingCartService shoppingCartService, HashUtilService hashUtilService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
         this.hashUtilService = hashUtilService;

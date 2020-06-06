@@ -6,21 +6,30 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import me.aborozdykh.cinema.dao.OrderDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
-import me.aborozdykh.cinema.lib.Dao;
 import me.aborozdykh.cinema.models.Order;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class OrderDaoImpl implements OrderDao {
+    private final SessionFactory sessionFactory;
+
+    @Autowired
+    public OrderDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public Order add(Order order) {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(order);
             transaction.commit();
@@ -42,7 +51,7 @@ public class OrderDaoImpl implements OrderDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.update(order);
             transaction.commit();
@@ -61,7 +70,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> getOrderHistory(User user) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             var cb = session.getCriteriaBuilder();
             CriteriaQuery<Order> orderCriteriaQuery
                     = cb.createQuery(Order.class);

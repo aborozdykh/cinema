@@ -5,21 +5,30 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import me.aborozdykh.cinema.dao.ShoppingCartDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
-import me.aborozdykh.cinema.lib.Dao;
 import me.aborozdykh.cinema.models.ShoppingCart;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
+    private final SessionFactory sessionFactory;
+
+    @Autowired
+    public ShoppingCartDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(shoppingCart);
             transaction.commit();
@@ -39,7 +48,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart getByUser(User user) {
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             var cb = session.getCriteriaBuilder();
             CriteriaQuery<ShoppingCart> shoppingCartCriteriaQuery
                     = cb.createQuery(ShoppingCart.class);
@@ -59,7 +68,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
         Session session = null;
         Transaction transaction = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.update(shoppingCart);
             transaction.commit();
