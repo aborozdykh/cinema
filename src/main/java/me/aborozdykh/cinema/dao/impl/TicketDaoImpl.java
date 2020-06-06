@@ -3,7 +3,6 @@ package me.aborozdykh.cinema.dao.impl;
 import me.aborozdykh.cinema.dao.TicketDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.models.Ticket;
-import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

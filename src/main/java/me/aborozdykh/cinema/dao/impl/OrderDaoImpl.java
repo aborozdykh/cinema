@@ -8,7 +8,6 @@ import me.aborozdykh.cinema.dao.OrderDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.models.Order;
 import me.aborozdykh.cinema.models.User;
-import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

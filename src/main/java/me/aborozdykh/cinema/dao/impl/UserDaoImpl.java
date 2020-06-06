@@ -6,7 +6,6 @@ import javax.persistence.criteria.Root;
 import me.aborozdykh.cinema.dao.UserDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.models.User;
-import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

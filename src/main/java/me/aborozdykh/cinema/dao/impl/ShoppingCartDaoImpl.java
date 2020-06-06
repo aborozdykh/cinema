@@ -7,7 +7,6 @@ import me.aborozdykh.cinema.dao.ShoppingCartDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.models.ShoppingCart;
 import me.aborozdykh.cinema.models.User;
-import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

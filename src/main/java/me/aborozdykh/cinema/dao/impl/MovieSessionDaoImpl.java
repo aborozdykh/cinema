@@ -7,7 +7,6 @@ import javax.persistence.criteria.Root;
 import me.aborozdykh.cinema.dao.MovieSessionDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import me.aborozdykh.cinema.models.MovieSession;
-import me.aborozdykh.cinema.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
