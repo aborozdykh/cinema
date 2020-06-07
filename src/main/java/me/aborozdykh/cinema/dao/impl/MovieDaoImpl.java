@@ -21,11 +21,6 @@ public class MovieDaoImpl extends GenericDaoImpl<Movie> implements MovieDao {
     }
 
     @Override
-    public Movie add(Movie movie) {
-        return super.add(movie);
-    }
-
-    @Override
     public List<Movie> getAll() {
         try (Session session = sessionFactory.openSession()) {
             CriteriaQuery<Movie> criteriaQuery = session.getCriteriaBuilder()

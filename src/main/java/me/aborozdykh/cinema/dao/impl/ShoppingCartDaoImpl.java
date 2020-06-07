@@ -24,11 +24,6 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
     }
 
     @Override
-    public ShoppingCart add(ShoppingCart shoppingCart) {
-        return super.add(shoppingCart);
-    }
-
-    @Override
     public ShoppingCart getByUser(User user) {
         try (Session session = sessionFactory.openSession()) {
             var cb = session.getCriteriaBuilder();

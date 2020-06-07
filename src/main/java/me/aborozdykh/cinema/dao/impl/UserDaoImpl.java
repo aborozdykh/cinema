@@ -21,11 +21,6 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     }
 
     @Override
-    public User add(User user) {
-        return super.add(user);
-    }
-
-    @Override
     public Optional<User> findByEmail(String email) {
         try (var session = sessionFactory.openSession()) {
             var cb = session.getCriteriaBuilder();

@@ -23,11 +23,6 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements
     }
 
     @Override
-    public MovieSession add(MovieSession movieSession) {
-        return super.add(movieSession);
-    }
-
-    @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         try (Session session = sessionFactory.openSession()) {
             var cb = session.getCriteriaBuilder();

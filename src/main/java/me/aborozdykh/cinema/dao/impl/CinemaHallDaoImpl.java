@@ -20,11 +20,6 @@ public class CinemaHallDaoImpl extends GenericDaoImpl<CinemaHall> implements Cin
     }
 
     @Override
-    public CinemaHall add(CinemaHall cinemaHall) {
-        return super.add(cinemaHall);
-    }
-
-    @Override
     public List<CinemaHall> getAll() {
         try (var session = sessionFactory.openSession()) {
             CriteriaQuery<CinemaHall> criteriaQuery = session.getCriteriaBuilder()

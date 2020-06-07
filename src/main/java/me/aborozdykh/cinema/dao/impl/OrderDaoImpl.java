@@ -25,11 +25,6 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
     }
 
     @Override
-    public Order add(Order order) {
-        return super.add(order);
-    }
-
-    @Override
     public void update(Order order) {
         Session session = null;
         Transaction transaction = null;

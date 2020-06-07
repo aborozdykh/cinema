@@ -1,5 +1,6 @@
 package me.aborozdykh.cinema.dao.impl;
 
+import me.aborozdykh.cinema.dao.GenericDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,14 +9,14 @@ import org.hibernate.Transaction;
 /**
  * @author Andrii Borozdykh created on 07.06.2020
  */
-public abstract class GenericDaoImpl<T> {
+public abstract class GenericDaoImpl<T> implements GenericDao<T> {
     private final SessionFactory sessionFactory;
 
     protected GenericDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
-    protected T add(T entity) {
+    public T add(T entity) {
         Session session = null;
         Transaction transaction = null;
         try {
