@@ -24,7 +24,7 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements
 
     @Override
     public MovieSession add(MovieSession movieSession) {
-        return addEntity(movieSession);
+        return super.add(movieSession);
     }
 
     @Override

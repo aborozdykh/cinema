@@ -15,7 +15,7 @@ public abstract class GenericDaoImpl<T> {
         this.sessionFactory = sessionFactory;
     }
 
-    protected T addEntity(T entity) {
+    protected T add(T entity) {
         Session session = null;
         Transaction transaction = null;
         try {

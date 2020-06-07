@@ -22,7 +22,7 @@ public class MovieDaoImpl extends GenericDaoImpl<Movie> implements MovieDao {
 
     @Override
     public Movie add(Movie movie) {
-        return addEntity(movie);
+        return super.add(movie);
     }
 
     @Override

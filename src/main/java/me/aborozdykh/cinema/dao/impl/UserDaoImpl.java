@@ -22,7 +22,7 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
 
     @Override
     public User add(User user) {
-        return addEntity(user);
+        return super.add(user);
     }
 
     @Override

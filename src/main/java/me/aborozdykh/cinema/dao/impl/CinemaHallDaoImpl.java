@@ -21,7 +21,7 @@ public class CinemaHallDaoImpl extends GenericDaoImpl<CinemaHall> implements Cin
 
     @Override
     public CinemaHall add(CinemaHall cinemaHall) {
-        return addEntity(cinemaHall);
+        return super.add(cinemaHall);
     }
 
     @Override

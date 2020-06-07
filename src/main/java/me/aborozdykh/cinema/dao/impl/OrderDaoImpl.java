@@ -26,7 +26,7 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
 
     @Override
     public Order add(Order order) {
-        return addEntity(order);
+        return super.add(order);
     }
 
     @Override

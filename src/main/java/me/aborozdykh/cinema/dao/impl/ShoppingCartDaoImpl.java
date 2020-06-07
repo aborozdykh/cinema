@@ -25,7 +25,7 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
 
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
-        return addEntity(shoppingCart);
+        return super.add(shoppingCart);
     }
 
     @Override

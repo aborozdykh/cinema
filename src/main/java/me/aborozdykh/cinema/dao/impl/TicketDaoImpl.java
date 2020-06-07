@@ -18,6 +18,6 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements TicketDao {
 
     @Override
     public Ticket add(Ticket ticket) {
-        return addEntity(ticket);
+        return super.add(ticket);
     }
 }
