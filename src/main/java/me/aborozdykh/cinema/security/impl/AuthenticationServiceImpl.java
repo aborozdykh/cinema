@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
-    private final String incorrectLoginOrPassword = "Enter valid login and password.";
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
     private final HashUtilService hashUtilService;
@@ -32,7 +31,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if (user.getPassword().equals(hashUtilService.hashPassword(password, user.getSalt()))) {
             return user;
         }
-        throw new AuthenticationException(incorrectLoginOrPassword);
+        throw new AuthenticationException("Enter valid login and password.");
     }
 
     @Override

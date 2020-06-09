@@ -3,7 +3,7 @@ package me.aborozdykh.cinema.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
- * @author Andrii Borozdykh created on 07.06.2020
+ * @author Andrii Borozdykh
  */
 public class AppServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
