@@ -10,7 +10,6 @@ import me.aborozdykh.cinema.models.Order;
 import me.aborozdykh.cinema.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -22,28 +21,6 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
     public OrderDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
         this.sessionFactory = sessionFactory;
-    }
-
-    @Override
-    public void update(Order order) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            session.update(order);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't update order entity "
-                    + order, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
     }
 
     @Override

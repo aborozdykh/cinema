@@ -42,14 +42,14 @@ public class AppConfig {
 
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
-        var factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setDataSource(getDataSource());
+        var sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(getDataSource());
         var properties = new Properties();
         properties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
-        factoryBean.setHibernateProperties(properties);
-        factoryBean.setPackagesToScan("me.aborozdykh.cinema.models");
-        return factoryBean;
+        sessionFactory.setHibernateProperties(properties);
+        sessionFactory.setPackagesToScan("me.aborozdykh.cinema.models");
+        return sessionFactory;
     }
 
 }
