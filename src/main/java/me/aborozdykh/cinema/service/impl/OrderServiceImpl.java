@@ -3,17 +3,21 @@ package me.aborozdykh.cinema.service.impl;
 import java.time.LocalDateTime;
 import java.util.List;
 import me.aborozdykh.cinema.dao.OrderDao;
-import me.aborozdykh.cinema.lib.Inject;
-import me.aborozdykh.cinema.lib.Service;
 import me.aborozdykh.cinema.models.Order;
 import me.aborozdykh.cinema.models.Ticket;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceImpl implements OrderService {
-    @Inject
-    private OrderDao orderDao;
+    private final OrderDao orderDao;
+
+    @Autowired
+    public OrderServiceImpl(OrderDao orderDao) {
+        this.orderDao = orderDao;
+    }
 
     @Override
     public Order completeOrder(List<Ticket> tickets, User user) {

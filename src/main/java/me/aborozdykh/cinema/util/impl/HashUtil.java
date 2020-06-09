@@ -4,8 +4,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import me.aborozdykh.cinema.exceptions.AuthenticationException;
-import me.aborozdykh.cinema.lib.Service;
 import me.aborozdykh.cinema.util.HashUtilService;
+import org.springframework.stereotype.Service;
 
 @Service
 public class HashUtil implements HashUtilService {
