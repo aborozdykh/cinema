@@ -2,13 +2,18 @@ package me.aborozdykh.cinema.config;
 
 import java.util.Properties;
 import javax.sql.DataSource;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 
 /**
@@ -51,5 +56,13 @@ public class AppConfig {
         sessionFactory.setPackagesToScan("me.aborozdykh.cinema.models");
         return sessionFactory;
     }
+
+//    @Bean
+//    @Primary
+//    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
+//        ObjectMapper objectMapper = builder.build();
+//        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+//        return objectMapper;
+//    }
 
 }

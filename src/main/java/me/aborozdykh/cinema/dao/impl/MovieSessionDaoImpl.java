@@ -1,6 +1,8 @@
 package me.aborozdykh.cinema.dao.impl;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -29,11 +31,11 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements
             CriteriaQuery<MovieSession> q = cb.createQuery(MovieSession.class);
             Root<MovieSession> root = q.from(MovieSession.class);
             var predicateForMovieId
-                    = cb.equal(root.get("movie"), movieId);
+                        = cb.equal(root.get("movie"), movieId);
             var dateTime = date.atStartOfDay();
             var predicateForDate
                     = cb.between(root.get("showTime"), dateTime, dateTime.plusDays(1));
-            var finalPredicate = cb.or(predicateForMovieId, predicateForDate);
+            var finalPredicate = cb.and(predicateForMovieId, predicateForDate);
             q.where(finalPredicate);
             return session.createQuery(q).getResultList();
         } catch (Exception e) {

@@ -42,7 +42,7 @@ public class Main {
         var movieSession = new MovieSession();
         movieSession.setMovie(movie);
         movieSession.setCinemaHall(cinemaHall);
-        LocalDateTime dateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 30));
+        var dateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 30));
         movieSession.setShowTime(dateTime);
 
         var movieSessionService = context.getBean(MovieSessionService.class);

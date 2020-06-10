@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/moviesessions")
 public class MovieSessionController {
     private final MovieSessionService movieSessionService;
-    private CinemaHallService cinemaHallService;
-    private MovieService movieService;
+    private final CinemaHallService cinemaHallService;
+    private final MovieService movieService;
 
     @Autowired
     public MovieSessionController(MovieSessionService movieSessionService,
@@ -41,7 +41,9 @@ public class MovieSessionController {
     public List<MovieSessionResponseDto> getAllMovieSessions(
             @RequestParam Long movieId,
             @RequestParam LocalDate date){
-        return movieSessionService.findAvailableSessions(movieId, date).stream()
+        return movieSessionService
+                .findAvailableSessions(movieId, date)
+                .stream()
                 .map(MovieSessionResponseDto::new)
                 .collect(Collectors.toList());
     }
