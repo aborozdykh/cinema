@@ -16,7 +16,7 @@ public class MovieSessionResponseDto {
     public MovieSessionResponseDto() {
     }
 
-    public MovieSessionResponseDto(MovieSession movieSession){
+    public MovieSessionResponseDto(MovieSession movieSession) {
         this.movieSessionId = movieSession.getId();
         this.movieId = movieSession.getMovie().getId();
         this.movieTitle = movieSession.getMovie().getTitle();

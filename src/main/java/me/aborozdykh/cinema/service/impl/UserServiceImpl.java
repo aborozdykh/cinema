@@ -1,7 +1,6 @@
 package me.aborozdykh.cinema.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 import me.aborozdykh.cinema.dao.UserDao;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.service.UserService;

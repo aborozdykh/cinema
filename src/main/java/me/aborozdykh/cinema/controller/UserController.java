@@ -2,9 +2,9 @@ package me.aborozdykh.cinema.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.models.dto.UserRequestDto;
 import me.aborozdykh.cinema.models.dto.UserResponseDto;
-import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public void addUser(@RequestBody UserRequestDto userRequestDto){
+    public void addUser(@RequestBody UserRequestDto userRequestDto) {
         var user = new User();
         user.setEmail(userRequestDto.getEmail());
         user.setPassword(userRequestDto.getPassword());

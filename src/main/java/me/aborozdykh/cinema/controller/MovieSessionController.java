@@ -1,7 +1,6 @@
 package me.aborozdykh.cinema.controller;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import me.aborozdykh.cinema.models.MovieSession;
@@ -40,7 +39,7 @@ public class MovieSessionController {
     @GetMapping("/available")
     public List<MovieSessionResponseDto> getAllMovieSessions(
             @RequestParam Long movieId,
-            @RequestParam LocalDate date){
+            @RequestParam LocalDate date) {
         return movieSessionService
                 .findAvailableSessions(movieId, date)
                 .stream()

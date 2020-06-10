@@ -1,10 +1,8 @@
 package me.aborozdykh.cinema.controller;
 
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import me.aborozdykh.cinema.models.CinemaHall;
-import me.aborozdykh.cinema.models.Movie;
 import me.aborozdykh.cinema.models.dto.CinemaHallRequestDto;
 import me.aborozdykh.cinema.models.dto.CinemaHallResponseDto;
 import me.aborozdykh.cinema.service.CinemaHallService;

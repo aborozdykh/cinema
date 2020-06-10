@@ -2,9 +2,8 @@ package me.aborozdykh.cinema.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import me.aborozdykh.cinema.models.User;
-import me.aborozdykh.cinema.models.dto.MovieRequestDto;
 import me.aborozdykh.cinema.models.Movie;
+import me.aborozdykh.cinema.models.dto.MovieRequestDto;
 import me.aborozdykh.cinema.models.dto.MovieResponseDto;
 import me.aborozdykh.cinema.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ public class MovieController {
     private final MovieService movieService;
 
     @Autowired
-    public MovieController (MovieService movieService){
+    public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
 
@@ -36,7 +35,7 @@ public class MovieController {
     }
 
     @PostMapping("/add")
-    public void addMovie(@RequestBody MovieRequestDto movieRequestDto){
+    public void addMovie(@RequestBody MovieRequestDto movieRequestDto) {
         var movie = new Movie();
         movie.setTitle(movieRequestDto.getTitle());
         movie.setDescription(movieRequestDto.getDescription());

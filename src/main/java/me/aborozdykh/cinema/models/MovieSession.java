@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import me.aborozdykh.cinema.models.dto.MovieRequestDto;
 
 @Entity
 @Table(name = "movie_session")
