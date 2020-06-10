@@ -30,4 +30,9 @@ public class CinemaHallServiceImpl implements CinemaHallService {
     public CinemaHall get(Long id) {
         return cinemaHallDao.get(id);
     }
+
+    @Override
+    public void update(CinemaHall cinemaHall) {
+        cinemaHallDao.update(cinemaHall);
+    }
 }

@@ -2,6 +2,7 @@ package me.aborozdykh.cinema.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.models.dto.MovieRequestDto;
 import me.aborozdykh.cinema.models.Movie;
 import me.aborozdykh.cinema.models.dto.MovieResponseDto;
@@ -24,6 +25,14 @@ public class MovieController {
     @Autowired
     public MovieController (MovieService movieService){
         this.movieService = movieService;
+    }
+
+    @GetMapping("/inject")
+    public String inject() {
+        movieService.add(new Movie("Phantomas returns", "The best movie about Phantomas"));
+        movieService.add(new Movie("Batman", "Crazy flying mouse"));
+        movieService.add(new Movie("Harry Potter", "Magic and nothing else"));
+        return "Movies was injected";
     }
 
     @PostMapping("/add")

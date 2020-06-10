@@ -1,8 +1,9 @@
 package me.aborozdykh.cinema.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
-import me.aborozdykh.cinema.models.Movie;
 import me.aborozdykh.cinema.models.MovieSession;
 import me.aborozdykh.cinema.models.dto.MovieSessionRequestDto;
 import me.aborozdykh.cinema.models.dto.MovieSessionResponseDto;
@@ -14,13 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Andrii Borozdykh
  */
 @RestController
-@RequestMapping("/moviesession")
+@RequestMapping("/moviesessions")
 public class MovieSessionController {
     private final MovieSessionService movieSessionService;
     private CinemaHallService cinemaHallService;
@@ -35,17 +37,16 @@ public class MovieSessionController {
         this.movieService = movieService;
     }
 
-//    @GetMapping
-//    public List<MovieSessionResponseDto> getAllMovieSessions(
-//            @RequestBody MovieSessionRequestDto movieSessionRequestDto){
-//        return movieSessionService.findAvailableSessions(
-//                movieSessionRequestDto.getMovieId(),
-//                movieSessionRequestDto.getShowTime()).stream()
-//                .map(MovieSessionResponseDto::new)
-//                .collect(Collectors.toList());
-//    }
+    @GetMapping("/available")
+    public List<MovieSessionResponseDto> getAllMovieSessions(
+            @RequestParam Long movieId,
+            @RequestParam LocalDate date){
+        return movieSessionService.findAvailableSessions(movieId, date).stream()
+                .map(MovieSessionResponseDto::new)
+                .collect(Collectors.toList());
+    }
 
-    @PostMapping
+    @PostMapping("/add")
     public void addMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
         movieSessionService.add(getMovieSessionFromDto(movieSessionRequestDto));
     }

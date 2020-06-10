@@ -33,4 +33,19 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> getOrderHistory(User user) {
         return orderDao.getOrderHistory(user);
     }
+
+    @Override
+    public Order add(Order order) {
+        return orderDao.add(order);
+    }
+
+    @Override
+    public Order get(Long id) {
+        return orderDao.get(id);
+    }
+
+    @Override
+    public void update(Order order) {
+        orderDao.update(order);
+    }
 }

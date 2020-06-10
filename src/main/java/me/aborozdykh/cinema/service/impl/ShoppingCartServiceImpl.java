@@ -49,4 +49,19 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCart.getTickets().removeAll(shoppingCart.getTickets());
         shoppingCartDao.update(shoppingCart);
     }
+
+    @Override
+    public ShoppingCart add(ShoppingCart shoppingCart) {
+        return shoppingCartDao.add(shoppingCart);
+    }
+
+    @Override
+    public ShoppingCart get(Long id) {
+        return shoppingCartDao.get(id);
+    }
+
+    @Override
+    public void update(ShoppingCart shoppingCart) {
+        shoppingCartDao.update(shoppingCart);
+    }
 }
