@@ -60,7 +60,7 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         }
     }
 
-    public List<T> getAll(Class clazz) {
+    protected List<T> getAll(Class clazz) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaQuery<T> criteriaQuery = session.getCriteriaBuilder()
                     .createQuery(clazz);

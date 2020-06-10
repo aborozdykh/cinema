@@ -1,5 +1,6 @@
 package me.aborozdykh.cinema.dao.impl;
 
+import java.util.List;
 import java.util.Optional;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -32,5 +33,10 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
         } catch (Exception e) {
             throw new DataProcessingException("Can't find user with login " + email, e);
         }
+    }
+
+    @Override
+    public List<User> getAll() {
+        return super.getAll(User.class);
     }
 }

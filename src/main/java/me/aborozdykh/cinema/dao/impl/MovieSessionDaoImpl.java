@@ -40,4 +40,9 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements
             throw new DataProcessingException("Can't find available sessions", e);
         }
     }
+
+    @Override
+    public List<MovieSession> getAll() {
+        return super.getAll(MovieSession.class);
+    }
 }

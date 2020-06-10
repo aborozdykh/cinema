@@ -39,4 +39,9 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
             throw new DataProcessingException("Can't get order by user " + user, e);
         }
     }
+
+    @Override
+    public List<Order> getAll() {
+        return super.getAll(Order.class);
+    }
 }

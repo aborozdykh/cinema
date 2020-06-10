@@ -1,5 +1,6 @@
 package me.aborozdykh.cinema.dao.impl;
 
+import java.util.List;
 import me.aborozdykh.cinema.dao.MovieDao;
 import me.aborozdykh.cinema.models.Movie;
 import org.hibernate.SessionFactory;
@@ -14,5 +15,10 @@ public class MovieDaoImpl extends GenericDaoImpl<Movie> implements MovieDao {
     public MovieDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
         this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public List<Movie> getAll() {
+        return super.getAll(Movie.class);
     }
 }

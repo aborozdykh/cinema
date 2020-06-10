@@ -29,6 +29,7 @@ public class Main {
         movie.setTitle("Phantomas returns");
         movie.setDescription("The best movie about Phantomas");
         movieService.add(movie);
+        movieService.getAll().forEach(System.out::println);
 
         var cinemaHallService = context.getBean(CinemaHallService.class);
 
@@ -75,6 +76,6 @@ public class Main {
         orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser());
         orderService.getOrderHistory(user).forEach(System.out::println);
 
-        context.close();
+//        context.close();
     }
 }

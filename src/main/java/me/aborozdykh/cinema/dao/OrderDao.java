@@ -6,4 +6,6 @@ import me.aborozdykh.cinema.models.User;
 
 public interface OrderDao extends GenericDao<Order> {
     List<Order> getOrderHistory(User user);
+
+    List<Order> getAll();
 }
