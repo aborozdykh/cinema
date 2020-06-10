@@ -33,12 +33,12 @@ public class UserController {
     }
 
     @GetMapping("/byemail")
-    public UserDto getUser(@RequestParam String email) {
+    public UserDto getUserByEmail(@RequestParam String email) {
         return new UserDto(userService.findByEmail(email).get());
     }
 
     @GetMapping
-    public List<UserDto> getAll() {
+    public List<UserDto> getAllUsers() {
         return userService.getAll().stream()
                 .map(UserDto::new)
                 .collect(Collectors.toList());
