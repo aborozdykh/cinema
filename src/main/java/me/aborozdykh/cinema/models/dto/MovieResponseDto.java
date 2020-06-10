@@ -1,17 +1,30 @@
-package me.aborozdykh.cinema.dto;
+package me.aborozdykh.cinema.models.dto;
 
 import me.aborozdykh.cinema.models.Movie;
 
 /**
  * @author Andrii Borozdykh
  */
-public class MovieDto {
+public class MovieResponseDto {
+    private Long movieId;
     private String title;
     private String description;
 
-    public MovieDto(Movie movie) {
+    public MovieResponseDto() {
+    }
+
+    public MovieResponseDto(Movie movie) {
+        this.movieId = movie.getId();
         this.title = movie.getTitle();
         this.description = movie.getDescription();
+    }
+
+    public Long getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
     }
 
     public String getTitle() {

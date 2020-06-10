@@ -45,4 +45,9 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements
     public List<MovieSession> getAll() {
         return super.getAll(MovieSession.class);
     }
+
+    @Override
+    public MovieSession get(Long id) {
+        return super.get(MovieSession.class, id);
+    }
 }

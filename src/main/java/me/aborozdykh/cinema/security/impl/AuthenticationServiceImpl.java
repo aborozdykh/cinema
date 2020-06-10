@@ -27,7 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
-        var user = userService.findByEmail(email).orElseThrow();
+        var user = userService.findByEmail(email);
         if (user.getPassword().equals(hashUtilService.hashPassword(password, user.getSalt()))) {
             return user;
         }

@@ -44,4 +44,9 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
     public List<Order> getAll() {
         return super.getAll(Order.class);
     }
+
+    @Override
+    public Order get(Long id) {
+        return super.get(Order.class, id);
+    }
 }

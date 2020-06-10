@@ -38,4 +38,9 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
             throw new DataProcessingException("Can't get shoppingCart by user " + user, e);
         }
     }
+
+    @Override
+    public ShoppingCart get(Long id) {
+        return super.get(ShoppingCart.class, id);
+    }
 }

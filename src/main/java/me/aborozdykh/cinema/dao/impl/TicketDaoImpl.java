@@ -15,4 +15,9 @@ public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements TicketDao {
         super(sessionFactory);
         this.sessionFactory = sessionFactory;
     }
+
+    @Override
+    public Ticket get(Long id) {
+        return super.get(Ticket.class, id);
+    }
 }

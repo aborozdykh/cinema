@@ -39,4 +39,9 @@ public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
     public List<User> getAll() {
         return super.getAll(User.class);
     }
+
+    @Override
+    public User get(Long id) {
+        return super.get(User.class, id);
+    }
 }

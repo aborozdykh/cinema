@@ -2,11 +2,14 @@ package me.aborozdykh.cinema.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import me.aborozdykh.cinema.dto.UserDto;
+import me.aborozdykh.cinema.models.dto.UserRequestDto;
+import me.aborozdykh.cinema.models.dto.UserResponseDto;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,15 +35,23 @@ public class UserController {
         return "Data was injected";
     }
 
+    @PostMapping("/add")
+    public void addUser(@RequestBody UserRequestDto userRequestDto){
+        var user = new User();
+        user.setEmail(userRequestDto.getEmail());
+        user.setPassword(userRequestDto.getPassword());
+        userService.add(user);
+    }
+
     @GetMapping("/byemail")
-    public UserDto getUserByEmail(@RequestParam String email) {
-        return new UserDto(userService.findByEmail(email).get());
+    public UserResponseDto getUserByEmail(@RequestParam String email) {
+        return new UserResponseDto(userService.findByEmail(email));
     }
 
     @GetMapping
-    public List<UserDto> getAllUsers() {
+    public List<UserResponseDto> getAllUsers() {
         return userService.getAll().stream()
-                .map(UserDto::new)
+                .map(UserResponseDto::new)
                 .collect(Collectors.toList());
     }
 }

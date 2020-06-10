@@ -2,8 +2,10 @@ package me.aborozdykh.cinema.dao.impl;
 
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import me.aborozdykh.cinema.dao.GenericDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
+import me.aborozdykh.cinema.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -69,6 +71,14 @@ public abstract class GenericDaoImpl<T> implements GenericDao<T> {
         } catch (Exception e) {
             throw new DataProcessingException("Can't get list of all elements "
                     + clazz.getName(), e);
+        }
+    }
+
+    protected T get(Class clazz, Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return (T) session.get(clazz, id);
+        } catch (Exception e) {
+            throw new RuntimeException("Can't get entity by id", e);
         }
     }
 }

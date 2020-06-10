@@ -1,15 +1,18 @@
-package me.aborozdykh.cinema.dto;
+package me.aborozdykh.cinema.models.dto;
 
 import me.aborozdykh.cinema.models.User;
 
 /**
  * @author Andrii Borozdykh
  */
-public class UserDto {
+public class UserRequestDto {
     private String email;
     private String password;
 
-    public UserDto(User user) {
+    public UserRequestDto() {
+    }
+
+    public UserRequestDto(User user) {
         this.setPassword(user.getPassword());
         this.setEmail(user.getEmail());
     }

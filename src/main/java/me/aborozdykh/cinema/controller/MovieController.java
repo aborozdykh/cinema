@@ -2,12 +2,15 @@ package me.aborozdykh.cinema.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import me.aborozdykh.cinema.dto.MovieDto;
+import me.aborozdykh.cinema.models.dto.MovieRequestDto;
 import me.aborozdykh.cinema.models.Movie;
+import me.aborozdykh.cinema.models.dto.MovieResponseDto;
 import me.aborozdykh.cinema.service.MovieService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -18,23 +21,23 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovieController {
     private final MovieService movieService;
 
+    @Autowired
     public MovieController (MovieService movieService){
         this.movieService = movieService;
     }
 
-    @GetMapping("/add")
-    public Movie addMovie(@RequestParam String title, @RequestParam String description){
+    @PostMapping("/add")
+    public void addMovie(@RequestBody MovieRequestDto movieRequestDto){
         var movie = new Movie();
-        movie.setTitle(title);
-        movie.setDescription(description);
+        movie.setTitle(movieRequestDto.getTitle());
+        movie.setDescription(movieRequestDto.getDescription());
         movieService.add(movie);
-        return movie;
     }
 
     @GetMapping
-    public List<MovieDto> getAllMovies() {
+    public List<MovieResponseDto> getAllMovies() {
         return movieService.getAll().stream()
-                .map(MovieDto::new)
+                .map(MovieResponseDto::new)
                 .collect(Collectors.toList());
     }
 }
