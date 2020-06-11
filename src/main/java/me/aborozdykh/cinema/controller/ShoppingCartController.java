@@ -1,6 +1,7 @@
 package me.aborozdykh.cinema.controller;
 
 import me.aborozdykh.cinema.models.dto.ShoppingCartResponseDto;
+import me.aborozdykh.cinema.models.mappers.ShoppingCartMapper;
 import me.aborozdykh.cinema.service.MovieSessionService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
@@ -20,21 +21,24 @@ public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final UserService userService;
     private final MovieSessionService movieSessionService;
+    private final ShoppingCartMapper shoppingCartMapper;
 
     @Autowired
     public ShoppingCartController(ShoppingCartService shoppingCartService,
                                   UserService userService,
-                                  MovieSessionService movieSessionService) {
+                                  MovieSessionService movieSessionService,
+                                  ShoppingCartMapper shoppingCartMapper) {
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
         this.movieSessionService = movieSessionService;
+        this.shoppingCartMapper = shoppingCartMapper;
     }
 
     @GetMapping("/by-user")
     public ShoppingCartResponseDto getShoppingCartByUserId(@RequestParam Long userId) {
         var user = userService.get(userId);
         var shoppingCart = shoppingCartService.getByUser(user);
-        return new ShoppingCartResponseDto(shoppingCart);
+        return shoppingCartMapper.getShoppingCartResponseDtoFromShoppingCart(shoppingCart);
     }
 
     @PostMapping("/add-movie-session")

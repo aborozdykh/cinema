@@ -42,7 +42,7 @@ public class MovieSessionController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public void addMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
         movieSessionService.add(movieSessionMapper.getMovieSessionFromDto(movieSessionRequestDto));
     }

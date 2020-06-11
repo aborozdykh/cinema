@@ -1,7 +1,6 @@
 package me.aborozdykh.cinema.models.dto;
 
 import java.time.LocalDateTime;
-import me.aborozdykh.cinema.models.MovieSession;
 
 /**
  * @author Andrii Borozdykh
@@ -14,14 +13,6 @@ public class MovieSessionResponseDto {
     private LocalDateTime showTime;
 
     public MovieSessionResponseDto() {
-    }
-
-    public MovieSessionResponseDto(MovieSession movieSession) {
-        this.movieSessionId = movieSession.getId();
-        this.movieId = movieSession.getMovie().getId();
-        this.movieTitle = movieSession.getMovie().getTitle();
-        this.cinemaHallId = movieSession.getCinemaHall().getId();
-        this.showTime = movieSession.getShowTime();
     }
 
     public Long getMovieSessionId() {

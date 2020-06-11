@@ -36,7 +36,7 @@ public class CinemaHallController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public void addCinemaHall(@RequestBody CinemaHallRequestDto cinemaHallRequestDto) {
         cinemaHallService.add(cinemaHallMapper.getCinemaHallFromDto(cinemaHallRequestDto));
     }
