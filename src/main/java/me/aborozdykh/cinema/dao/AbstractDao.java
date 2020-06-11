@@ -1,6 +1,6 @@
 package me.aborozdykh.cinema.dao;
 
-public interface GenericDao<T> {
+public interface AbstractDao<T> {
     T add(T entity);
 
     void update(T entity);

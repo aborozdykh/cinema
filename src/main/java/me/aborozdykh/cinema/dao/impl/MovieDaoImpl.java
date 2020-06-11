@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MovieDaoImpl extends GenericDaoImpl<Movie> implements MovieDao {
+public class MovieDaoImpl extends AbstractDaoImpl<Movie> implements MovieDao {
     private final SessionFactory sessionFactory;
 
     @Autowired

@@ -3,11 +3,9 @@ package me.aborozdykh.cinema.controller;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import me.aborozdykh.cinema.models.MovieSession;
 import me.aborozdykh.cinema.models.dto.MovieSessionRequestDto;
 import me.aborozdykh.cinema.models.dto.MovieSessionResponseDto;
-import me.aborozdykh.cinema.service.CinemaHallService;
-import me.aborozdykh.cinema.service.MovieService;
+import me.aborozdykh.cinema.models.mappers.MovieSessionMapper;
 import me.aborozdykh.cinema.service.MovieSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,16 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/moviesessions")
 public class MovieSessionController {
     private final MovieSessionService movieSessionService;
-    private final CinemaHallService cinemaHallService;
-    private final MovieService movieService;
+    private final MovieSessionMapper movieSessionMapper;
 
     @Autowired
     public MovieSessionController(MovieSessionService movieSessionService,
-                                  CinemaHallService cinemaHallService,
-                                  MovieService movieService) {
+                                  MovieSessionMapper movieSessionMapper) {
         this.movieSessionService = movieSessionService;
-        this.cinemaHallService = cinemaHallService;
-        this.movieService = movieService;
+        this.movieSessionMapper = movieSessionMapper;
     }
 
     @GetMapping("/available")
@@ -43,20 +38,12 @@ public class MovieSessionController {
         return movieSessionService
                 .findAvailableSessions(movieId, date)
                 .stream()
-                .map(MovieSessionResponseDto::new)
+                .map(movieSessionMapper::getMovieSessionResponseDtoFromMovieSession)
                 .collect(Collectors.toList());
     }
 
     @PostMapping("/add")
     public void addMovieSession(@RequestBody MovieSessionRequestDto movieSessionRequestDto) {
-        movieSessionService.add(getMovieSessionFromDto(movieSessionRequestDto));
-    }
-
-    private MovieSession getMovieSessionFromDto(MovieSessionRequestDto movieSessionRequestDto) {
-        var movieSession = new MovieSession();
-        movieSession.setCinemaHall(cinemaHallService.get(movieSessionRequestDto.getCinemaHallId()));
-        movieSession.setMovie(movieService.get(movieSessionRequestDto.getMovieId()));
-        movieSession.setShowTime(movieSessionRequestDto.getShowTime());
-        return movieSession;
+        movieSessionService.add(movieSessionMapper.getMovieSessionFromDto(movieSessionRequestDto));
     }
 }

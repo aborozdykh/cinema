@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
+public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDao {
     private final SessionFactory sessionFactory;
 
     @Autowired

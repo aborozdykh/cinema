@@ -2,7 +2,7 @@ package me.aborozdykh.cinema.dao.impl;
 
 import java.util.List;
 import javax.persistence.criteria.CriteriaQuery;
-import me.aborozdykh.cinema.dao.GenericDao;
+import me.aborozdykh.cinema.dao.AbstractDao;
 import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -11,10 +11,10 @@ import org.hibernate.Transaction;
 /**
  * @author Andrii Borozdykh
  */
-public abstract class GenericDaoImpl<T> implements GenericDao<T> {
+public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     private final SessionFactory sessionFactory;
 
-    protected GenericDaoImpl(SessionFactory sessionFactory) {
+    protected AbstractDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 

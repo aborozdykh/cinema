@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
+public class UserDaoImpl extends AbstractDaoImpl<User> implements UserDao {
     private final SessionFactory sessionFactory;
 
     @Autowired

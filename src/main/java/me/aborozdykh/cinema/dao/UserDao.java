@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import me.aborozdykh.cinema.models.User;
 
-public interface UserDao extends GenericDao<User> {
+public interface UserDao extends AbstractDao<User> {
     User get(Long id);
 
     Optional<User> findByEmail(String email);

@@ -19,7 +19,8 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
         "me.aborozdykh.cinema.service",
         "me.aborozdykh.cinema.dao",
         "me.aborozdykh.cinema.security",
-        "me.aborozdykh.cinema.util"
+        "me.aborozdykh.cinema.util",
+        "me.aborozdykh.cinema.models.mappers"
 })
 @PropertySource("classpath:db.properties")
 public class AppConfig {

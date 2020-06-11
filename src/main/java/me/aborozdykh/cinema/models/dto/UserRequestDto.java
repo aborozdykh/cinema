@@ -1,7 +1,5 @@
 package me.aborozdykh.cinema.models.dto;
 
-import me.aborozdykh.cinema.models.User;
-
 /**
  * @author Andrii Borozdykh
  */
@@ -10,11 +8,6 @@ public class UserRequestDto {
     private String password;
 
     public UserRequestDto() {
-    }
-
-    public UserRequestDto(User user) {
-        this.setPassword(user.getPassword());
-        this.setEmail(user.getEmail());
     }
 
     public String getEmail() {

@@ -5,9 +5,12 @@ import java.util.List;
 /**
  * @author Andrii Borozdykh
  */
-public class OrderRequestDto {
+public class ShoppingCartRequestDto {
     private List<Long> ticketsId;
     private Long userId;
+
+    public ShoppingCartRequestDto() {
+    }
 
     public List<Long> getTicketsId() {
         return ticketsId;
