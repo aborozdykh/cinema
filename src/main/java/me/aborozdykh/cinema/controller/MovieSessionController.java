@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Andrii Borozdykh
  */
 @RestController
-@RequestMapping("/moviesessions")
+@RequestMapping("/movie-sessions")
 public class MovieSessionController {
     private final MovieSessionService movieSessionService;
     private final MovieSessionMapper movieSessionMapper;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Andrii Borozdykh
  */
 @RestController
-@RequestMapping("/shoppingcarts")
+@RequestMapping("/shopping-carts")
 public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final UserService userService;
@@ -30,14 +30,14 @@ public class ShoppingCartController {
         this.movieSessionService = movieSessionService;
     }
 
-    @GetMapping("/byuser")
+    @GetMapping("/by-user")
     public ShoppingCartResponseDto getShoppingCartByUserId(@RequestParam Long userId) {
         var user = userService.get(userId);
         var shoppingCart = shoppingCartService.getByUser(user);
         return new ShoppingCartResponseDto(shoppingCart);
     }
 
-    @PostMapping("/addmoviesession")
+    @PostMapping("/add-movie-session")
     public void addMovieSessionToShoppingCart(@RequestParam Long movieSessionId,
                                               @RequestParam Long userId) {
         var user = userService.get(userId);
