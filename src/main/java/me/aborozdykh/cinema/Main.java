@@ -71,7 +71,7 @@ public class Main {
                 + userWithCorrectLoginAndPassword);
 
         //Add Order
-        System.out.println("_____________________________________________________________");
+        System.out.println("_____________________________________________________");
         var orderService = context.getBean(OrderService.class);
         orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser());
         orderService.getOrderHistory(user).forEach(System.out::println);
