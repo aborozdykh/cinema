@@ -29,6 +29,7 @@ public class Main {
         movie.setTitle("Phantomas returns");
         movie.setDescription("The best movie about Phantomas");
         movieService.add(movie);
+        movieService.getAll().forEach(System.out::println);
 
         var cinemaHallService = context.getBean(CinemaHallService.class);
 
@@ -41,7 +42,7 @@ public class Main {
         var movieSession = new MovieSession();
         movieSession.setMovie(movie);
         movieSession.setCinemaHall(cinemaHall);
-        LocalDateTime dateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 30));
+        var dateTime = LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 30));
         movieSession.setShowTime(dateTime);
 
         var movieSessionService = context.getBean(MovieSessionService.class);
@@ -70,7 +71,7 @@ public class Main {
                 + userWithCorrectLoginAndPassword);
 
         //Add Order
-        System.out.println("_____________________________________________________________");
+        System.out.println("_____________________________________________________");
         var orderService = context.getBean(OrderService.class);
         orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser());
         orderService.getOrderHistory(user).forEach(System.out::println);

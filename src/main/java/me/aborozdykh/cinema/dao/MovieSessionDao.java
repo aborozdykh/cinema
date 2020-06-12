@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.List;
 import me.aborozdykh.cinema.models.MovieSession;
 
-public interface MovieSessionDao extends GenericDao<MovieSession> {
+public interface MovieSessionDao extends AbstractDao<MovieSession> {
     List<MovieSession> findAvailableSessions(Long movieId, LocalDate date);
+
+    List<MovieSession> getAll();
 }

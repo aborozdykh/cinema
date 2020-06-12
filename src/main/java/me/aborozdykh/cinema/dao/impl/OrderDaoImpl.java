@@ -10,40 +10,17 @@ import me.aborozdykh.cinema.models.Order;
 import me.aborozdykh.cinema.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
+public class OrderDaoImpl extends AbstractDaoImpl<Order> implements OrderDao {
     private final SessionFactory sessionFactory;
 
     @Autowired
     public OrderDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
         this.sessionFactory = sessionFactory;
-    }
-
-    @Override
-    public void update(Order order) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            session.update(order);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't update order entity "
-                    + order, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
     }
 
     @Override
@@ -61,5 +38,15 @@ public class OrderDaoImpl extends GenericDaoImpl<Order> implements OrderDao {
         } catch (Exception e) {
             throw new DataProcessingException("Can't get order by user " + user, e);
         }
+    }
+
+    @Override
+    public List<Order> getAll() {
+        return super.getAll(Order.class);
+    }
+
+    @Override
+    public Order get(Long id) {
+        return super.get(Order.class, id);
     }
 }

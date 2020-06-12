@@ -9,12 +9,11 @@ import me.aborozdykh.cinema.models.ShoppingCart;
 import me.aborozdykh.cinema.models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements ShoppingCartDao {
+public class ShoppingCartDaoImpl extends AbstractDaoImpl<ShoppingCart> implements ShoppingCartDao {
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -41,24 +40,7 @@ public class ShoppingCartDaoImpl extends GenericDaoImpl<ShoppingCart> implements
     }
 
     @Override
-    public void update(ShoppingCart shoppingCart) {
-        Session session = null;
-        Transaction transaction = null;
-        try {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-            session.update(shoppingCart);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            throw new DataProcessingException("Can't update shoppingCart entity "
-                    + shoppingCart, e);
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
+    public ShoppingCart get(Long id) {
+        return super.get(ShoppingCart.class, id);
     }
 }

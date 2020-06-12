@@ -1,6 +1,6 @@
 package me.aborozdykh.cinema.service.impl;
 
-import java.util.Optional;
+import java.util.List;
 import me.aborozdykh.cinema.dao.UserDao;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.service.UserService;
@@ -22,7 +22,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userDao.findByEmail(email);
+    public void update(User user) {
+        userDao.update(user);
+    }
+
+    @Override
+    public User get(Long id) {
+        return userDao.get(id);
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        var user = userDao.findByEmail(email);
+        return user.isPresent() ? user.get() : null;
+    }
+
+    @Override
+    public List<User> getAll() {
+        return userDao.getAll();
     }
 }

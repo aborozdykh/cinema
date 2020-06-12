@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TicketDaoImpl extends GenericDaoImpl<Ticket> implements TicketDao {
-    private final SessionFactory sessionFactory;
+public class TicketDaoImpl extends AbstractDaoImpl<Ticket> implements TicketDao {
 
     @Autowired
     public TicketDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
-        this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public Ticket get(Long id) {
+        return super.get(Ticket.class, id);
     }
 }

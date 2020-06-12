@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements MovieSessionDao {
+public class MovieSessionDaoImpl extends AbstractDaoImpl<MovieSession> implements MovieSessionDao {
     private final SessionFactory sessionFactory;
 
     @Autowired
@@ -29,15 +29,25 @@ public class MovieSessionDaoImpl extends GenericDaoImpl<MovieSession> implements
             CriteriaQuery<MovieSession> q = cb.createQuery(MovieSession.class);
             Root<MovieSession> root = q.from(MovieSession.class);
             var predicateForMovieId
-                    = cb.equal(root.get("movie"), movieId);
+                        = cb.equal(root.get("movie"), movieId);
             var dateTime = date.atStartOfDay();
             var predicateForDate
                     = cb.between(root.get("showTime"), dateTime, dateTime.plusDays(1));
-            var finalPredicate = cb.or(predicateForMovieId, predicateForDate);
+            var finalPredicate = cb.and(predicateForMovieId, predicateForDate);
             q.where(finalPredicate);
             return session.createQuery(q).getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Can't find available sessions", e);
         }
+    }
+
+    @Override
+    public List<MovieSession> getAll() {
+        return super.getAll(MovieSession.class);
+    }
+
+    @Override
+    public MovieSession get(Long id) {
+        return super.get(MovieSession.class, id);
     }
 }

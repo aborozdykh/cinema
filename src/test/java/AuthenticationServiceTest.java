@@ -27,7 +27,7 @@ public class AuthenticationServiceTest {
         expected.setSalt(salt);
 
         UserService userService = Mockito.mock(UserService.class);
-        Mockito.when(userService.findByEmail(email)).thenReturn(Optional.of(expected));
+        Mockito.when(userService.findByEmail(email)).thenReturn(expected);
 
         HashUtilService hashUtilService = Mockito.mock(HashUtilService.class);
         Mockito.when(hashUtilService.hashPassword(password, salt)).thenReturn(password);
