@@ -7,9 +7,6 @@ public class UserRequestDto {
     private String email;
     private String password;
 
-    public UserRequestDto() {
-    }
-
     public String getEmail() {
         return email;
     }

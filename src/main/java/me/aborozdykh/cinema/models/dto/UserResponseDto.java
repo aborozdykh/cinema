@@ -8,9 +8,6 @@ public class UserResponseDto {
     private String email;
     private String password;
 
-    public UserResponseDto() {
-    }
-
     public Long getUserId() {
         return userId;
     }

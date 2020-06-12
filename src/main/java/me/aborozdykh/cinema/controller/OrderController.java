@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import me.aborozdykh.cinema.models.dto.OrderResponseDto;
 import me.aborozdykh.cinema.models.dto.UserRequestDto;
 import me.aborozdykh.cinema.models.mappers.OrderMapper;
-import me.aborozdykh.cinema.models.mappers.UserMapper;
 import me.aborozdykh.cinema.service.OrderService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
@@ -26,19 +25,16 @@ public class OrderController {
     private final OrderService orderService;
     private final UserService userService;
     private final OrderMapper orderMapper;
-    private final UserMapper userMapper;
     private final ShoppingCartService shoppingCartService;
 
     @Autowired
     public OrderController(OrderService orderService,
                            UserService userService,
                            OrderMapper orderMapper,
-                           UserMapper userMapper,
                            ShoppingCartService shoppingCartService) {
         this.orderService = orderService;
         this.userService = userService;
         this.orderMapper = orderMapper;
-        this.userMapper = userMapper;
         this.shoppingCartService = shoppingCartService;
     }
 

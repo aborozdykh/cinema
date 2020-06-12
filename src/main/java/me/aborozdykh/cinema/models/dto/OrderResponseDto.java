@@ -12,9 +12,6 @@ public class OrderResponseDto {
     private List<Long> ticketsId;
     private Long userId;
 
-    public OrderResponseDto() {
-    }
-
     public Long getOrderId() {
         return orderId;
     }

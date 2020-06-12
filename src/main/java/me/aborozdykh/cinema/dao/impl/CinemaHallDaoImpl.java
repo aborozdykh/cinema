@@ -9,12 +9,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class CinemaHallDaoImpl extends AbstractDaoImpl<CinemaHall> implements CinemaHallDao {
-    private final SessionFactory sessionFactory;
 
     @Autowired
     public CinemaHallDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
-        this.sessionFactory = sessionFactory;
     }
 
     @Override

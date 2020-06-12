@@ -7,6 +7,7 @@ import me.aborozdykh.cinema.exceptions.DataProcessingException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * @author Andrii Borozdykh
@@ -14,6 +15,7 @@ import org.hibernate.Transaction;
 public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
     private final SessionFactory sessionFactory;
 
+    @Autowired
     protected AbstractDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -72,11 +74,11 @@ public abstract class AbstractDaoImpl<T> implements AbstractDao<T> {
         }
     }
 
-    protected T get(Class clazz, Long id) {
+    public T get(Class clazz, Long id) {
         try (Session session = sessionFactory.openSession()) {
             return (T) session.get(clazz, id);
         } catch (Exception e) {
-            throw new RuntimeException("Can't get entity by id", e);
+            throw new DataProcessingException("Can't get entity by id", e);
         }
     }
 }

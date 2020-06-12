@@ -25,8 +25,7 @@ public class OrderServiceImpl implements OrderService {
         order.setUser(user);
         order.setTickets(tickets);
         order.setOrderDate(LocalDateTime.now());
-        var orderFromDb = orderDao.add(order);
-        return orderFromDb;
+        return orderDao.add(order);
     }
 
     @Override

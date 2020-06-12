@@ -10,9 +10,6 @@ public class ShoppingCartResponseDto {
     private List<Long> ticketsId;
     private Long userId;
 
-    public ShoppingCartResponseDto() {
-    }
-
     public Long getShoppingCartId() {
         return shoppingCartId;
     }
