@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import me.aborozdykh.cinema.models.dto.OrderResponseDto;
 import me.aborozdykh.cinema.models.dto.UserRequestDto;
 import me.aborozdykh.cinema.models.mappers.OrderMapper;
+import me.aborozdykh.cinema.security.util.SecurityUtils;
 import me.aborozdykh.cinema.service.OrderService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,21 +26,25 @@ public class OrderController {
     private final UserService userService;
     private final OrderMapper orderMapper;
     private final ShoppingCartService shoppingCartService;
+    private final SecurityUtils securityUtils;
 
     @Autowired
     public OrderController(OrderService orderService,
                            UserService userService,
                            OrderMapper orderMapper,
-                           ShoppingCartService shoppingCartService) {
+                           ShoppingCartService shoppingCartService,
+                           SecurityUtils securityUtils) {
         this.orderService = orderService;
         this.userService = userService;
         this.orderMapper = orderMapper;
         this.shoppingCartService = shoppingCartService;
+        this.securityUtils = securityUtils;
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderByUserId(@RequestParam Long userId) {
-        return orderService.getOrderHistory(userService.get(userId))
+    public List<OrderResponseDto> getOrderByUserId() {
+        return orderService
+                .getOrderHistory(userService.findByEmail(securityUtils.getEmail()))
                 .stream()
                 .map(orderMapper::getOrderResponseDtoFromOrder)
                 .collect(Collectors.toList());
