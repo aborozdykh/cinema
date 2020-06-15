@@ -1,14 +1,16 @@
 package me.aborozdykh.cinema.lib;
 
+import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import me.aborozdykh.cinema.models.dto.UserRegistrationDto;
 import org.springframework.beans.BeanWrapperImpl;
 
 /**
  * @author Andrii Borozdykh
  */
 public class PasswordsMatchValidator
-        implements ConstraintValidator<PasswordsMatch, Object> {
+        implements ConstraintValidator<PasswordsMatch, UserRegistrationDto> {
     private String password;
     private String repeatPassword;
 
@@ -18,7 +20,7 @@ public class PasswordsMatchValidator
         this.repeatPassword = constraintAnnotation.repeatPassword();
     }
 
-    public boolean isValid(Object value,
+    public boolean isValid(UserRegistrationDto value,
                            ConstraintValidatorContext context) {
 
         Object field = new BeanWrapperImpl(value)
@@ -26,10 +28,6 @@ public class PasswordsMatchValidator
         Object fieldMatch = new BeanWrapperImpl(value)
                 .getPropertyValue(this.repeatPassword);
 
-        if (field != null) {
-            return field.equals(fieldMatch);
-        } else {
-            return fieldMatch == null;
-        }
+        return Objects.equals(field, fieldMatch);
     }
 }

@@ -7,15 +7,12 @@ import javax.validation.ConstraintValidatorContext;
  * @author Andrii Borozdykh
  */
 public class EmailValidator implements ConstraintValidator<EmailConstraint, String> {
-    @Override
-    public void initialize(EmailConstraint constraintAnnotation) {
-        // Do nothing because there is no fields in this class
-    }
+    private final String emailRegexp = "^.+@.*";
 
     @Override
     public boolean isValid(String contactField,
                            ConstraintValidatorContext constraintValidatorContext) {
         return contactField
-                .matches("^.+@.*");
+                .matches(emailRegexp);
     }
 }

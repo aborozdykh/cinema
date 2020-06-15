@@ -1,6 +1,7 @@
 package me.aborozdykh.cinema.models.dto;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import me.aborozdykh.cinema.lib.EmailConstraint;
 import me.aborozdykh.cinema.lib.PasswordComplexityConstraint;
 import me.aborozdykh.cinema.lib.PasswordsMatch;
@@ -19,6 +20,7 @@ public class UserRegistrationDto {
     @EmailConstraint
     private String email;
     @NotNull
+    @Size(min = 8)
     @PasswordComplexityConstraint
     private String password;
     @NotNull

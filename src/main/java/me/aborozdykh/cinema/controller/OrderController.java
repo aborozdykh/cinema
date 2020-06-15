@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 import me.aborozdykh.cinema.models.dto.OrderResponseDto;
 import me.aborozdykh.cinema.models.dto.UserRequestDto;
 import me.aborozdykh.cinema.models.mappers.OrderMapper;
-import me.aborozdykh.cinema.security.util.SecurityUtils;
 import me.aborozdykh.cinema.service.OrderService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,25 +26,22 @@ public class OrderController {
     private final UserService userService;
     private final OrderMapper orderMapper;
     private final ShoppingCartService shoppingCartService;
-    private final SecurityUtils securityUtils;
 
     @Autowired
     public OrderController(OrderService orderService,
                            UserService userService,
                            OrderMapper orderMapper,
-                           ShoppingCartService shoppingCartService,
-                           SecurityUtils securityUtils) {
+                           ShoppingCartService shoppingCartService) {
         this.orderService = orderService;
         this.userService = userService;
         this.orderMapper = orderMapper;
         this.shoppingCartService = shoppingCartService;
-        this.securityUtils = securityUtils;
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderByUserId() {
+    public List<OrderResponseDto> getOrderByUserId(Authentication authentication) {
         return orderService
-                .getOrderHistory(userService.findByEmail(securityUtils.getEmail()))
+                .getOrderHistory(userService.findByEmail(authentication.getName()))
                 .stream()
                 .map(orderMapper::getOrderResponseDtoFromOrder)
                 .collect(Collectors.toList());
