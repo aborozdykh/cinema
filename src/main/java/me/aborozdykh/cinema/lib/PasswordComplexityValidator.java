@@ -8,14 +8,14 @@ import javax.validation.ConstraintValidatorContext;
  */
 public class PasswordComplexityValidator implements
         ConstraintValidator<PasswordComplexityConstraint, String> {
-    private final String passwordRegexp
+    private static final String PASSWORD_REGEXP
             = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$";
 
     @Override
     public boolean isValid(String contactField,
                            ConstraintValidatorContext cxt) {
-        return contactField
-                .matches(passwordRegexp);
+        return contactField != null
+                && contactField.matches(PASSWORD_REGEXP);
     }
 }
 
