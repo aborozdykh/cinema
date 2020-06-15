@@ -1,6 +1,8 @@
 package me.aborozdykh.cinema.models;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -12,6 +14,7 @@ public class Role {
     @Id
     @GeneratedValue
     private Long id;
+    @Enumerated(EnumType.STRING)
     private RoleName roleName;
 
     public Role() {
@@ -41,7 +44,7 @@ public class Role {
         this.roleName = roleName;
     }
 
-    private enum RoleName {
-        USER, ADMIN
+    public enum RoleName {
+        USER, ADMIN;
     }
 }
