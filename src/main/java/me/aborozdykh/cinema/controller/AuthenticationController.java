@@ -1,7 +1,8 @@
 package me.aborozdykh.cinema.controller;
 
+import javax.validation.Valid;
 import me.aborozdykh.cinema.exceptions.AuthenticationException;
-import me.aborozdykh.cinema.models.dto.UserRequestDto;
+import me.aborozdykh.cinema.models.dto.UserRegistrationDto;
 import me.aborozdykh.cinema.security.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,8 +22,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public void registerUser(@RequestBody UserRequestDto userRequestDto)
+    public void registerUser(@RequestBody @Valid UserRegistrationDto userRegistrationDto)
             throws AuthenticationException {
-        authenticationService.register(userRequestDto.getEmail(), userRequestDto.getPassword());
+        authenticationService.register(userRegistrationDto.getEmail(),
+                userRegistrationDto.getPassword());
     }
 }

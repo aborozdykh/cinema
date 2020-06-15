@@ -9,11 +9,11 @@ import me.aborozdykh.cinema.service.OrderService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -39,8 +39,9 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderResponseDto> getOrderByUserId(@RequestParam Long userId) {
-        return orderService.getOrderHistory(userService.get(userId))
+    public List<OrderResponseDto> getOrderByUserId(Authentication authentication) {
+        return orderService
+                .getOrderHistory(userService.findByEmail(authentication.getName()))
                 .stream()
                 .map(orderMapper::getOrderResponseDtoFromOrder)
                 .collect(Collectors.toList());
