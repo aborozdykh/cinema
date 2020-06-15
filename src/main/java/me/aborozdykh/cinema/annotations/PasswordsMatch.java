@@ -1,4 +1,4 @@
-package me.aborozdykh.cinema.lib;
+package me.aborozdykh.cinema.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

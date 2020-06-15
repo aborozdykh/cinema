@@ -1,4 +1,4 @@
-package me.aborozdykh.cinema.lib;
+package me.aborozdykh.cinema.annotations;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -12,10 +12,10 @@ public class PasswordComplexityValidator implements
             = "(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$";
 
     @Override
-    public boolean isValid(String contactField,
+    public boolean isValid(String password,
                            ConstraintValidatorContext cxt) {
-        return contactField != null
-                && contactField.matches(PASSWORD_REGEXP);
+        return password != null
+                && password.matches(PASSWORD_REGEXP);
     }
 }
 

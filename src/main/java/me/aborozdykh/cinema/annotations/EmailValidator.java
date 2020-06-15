@@ -1,4 +1,4 @@
-package me.aborozdykh.cinema.lib;
+package me.aborozdykh.cinema.annotations;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
