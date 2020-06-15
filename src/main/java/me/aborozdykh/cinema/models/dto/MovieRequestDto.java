@@ -1,12 +1,15 @@
 package me.aborozdykh.cinema.models.dto;
 
+import javax.validation.constraints.NotNull;
 import me.aborozdykh.cinema.models.Movie;
 
 /**
  * @author Andrii Borozdykh
  */
 public class MovieRequestDto {
+    @NotNull
     private String title;
+    @NotNull
     private String description;
 
     public MovieRequestDto() {
