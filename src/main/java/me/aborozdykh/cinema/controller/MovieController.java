@@ -2,6 +2,7 @@ package me.aborozdykh.cinema.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import me.aborozdykh.cinema.models.dto.MovieRequestDto;
 import me.aborozdykh.cinema.models.dto.MovieResponseDto;
 import me.aborozdykh.cinema.models.mappers.MovieMapper;
@@ -29,7 +30,7 @@ public class MovieController {
     }
 
     @PostMapping
-    public void addMovie(@RequestBody MovieRequestDto movieRequestDto) {
+    public void addMovie(@RequestBody @Valid MovieRequestDto movieRequestDto) {
         movieService.add(movieMapper.getMovieFromMovieRequestDto(movieRequestDto));
     }
 
