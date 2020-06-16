@@ -5,7 +5,7 @@ import me.aborozdykh.cinema.models.Order;
 import me.aborozdykh.cinema.models.Ticket;
 import me.aborozdykh.cinema.models.User;
 
-public interface OrderService extends GenericService<Order> {
+public interface OrderService extends AbstractService<Order> {
     Order completeOrder(List<Ticket> tickets, User user);
 
     List<Order> getOrderHistory(User user);

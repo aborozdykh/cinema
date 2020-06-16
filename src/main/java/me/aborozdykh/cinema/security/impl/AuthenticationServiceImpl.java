@@ -5,7 +5,6 @@ import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.security.AuthenticationService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
-import me.aborozdykh.cinema.util.HashUtilService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +12,13 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
-    private final HashUtilService hashUtilService;
 
     @Autowired
     public AuthenticationServiceImpl(
             UserService userService,
-            ShoppingCartService shoppingCartService,
-            HashUtilService hashUtilService) {
+            ShoppingCartService shoppingCartService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
-        this.hashUtilService = hashUtilService;
     }
 
     @Override

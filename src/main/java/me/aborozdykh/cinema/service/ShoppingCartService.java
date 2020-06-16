@@ -4,7 +4,7 @@ import me.aborozdykh.cinema.models.MovieSession;
 import me.aborozdykh.cinema.models.ShoppingCart;
 import me.aborozdykh.cinema.models.User;
 
-public interface ShoppingCartService extends GenericService<ShoppingCart> {
+public interface ShoppingCartService extends AbstractService<ShoppingCart> {
     /**
      * This method is responsible to add a Ticket to the ShoppingCart
      *
