@@ -5,11 +5,13 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @author Andrii Borozdykh
  */
 @Entity
+@Table(name = "role")
 public class Role {
     @Id
     @GeneratedValue

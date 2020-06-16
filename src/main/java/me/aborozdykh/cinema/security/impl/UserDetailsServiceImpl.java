@@ -1,13 +1,14 @@
 package me.aborozdykh.cinema.security.impl;
 
+import me.aborozdykh.cinema.models.Role;
 import me.aborozdykh.cinema.service.UserService;
-import org.hibernate.internal.build.AllowPrintStacktrace;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.User.UserBuilder;
+
 
 /**
  * @author Andrii Borozdykh
@@ -28,7 +29,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (user != null) {
             builder = org.springframework.security.core.userdetails.User.withUsername(username);
             builder.password(user.getPassword());
-            builder.roles(user.getRoles().toString());
+            var roleSet = user.getRoles();
+            String[] roles = roleSet.stream()
+                    .map(Role::getRoleName)
+                    .map(Enum::name)
+                    .toArray(String[]::new);
+            builder.roles(roles);
         } else {
             throw new UsernameNotFoundException("User not found");
         }

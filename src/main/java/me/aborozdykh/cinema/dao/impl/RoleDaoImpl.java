@@ -29,12 +29,13 @@ public class RoleDaoImpl extends AbstractDaoImpl<Role> implements RoleDao {
 
     @Override
     public Role getRoleByName(String roleName) {
+        var roleNameEnum = Role.RoleName.valueOf(roleName);
         try (var session = sessionFactory.openSession()) {
             var cb = session.getCriteriaBuilder();
             CriteriaQuery<Role> query = cb.createQuery(Role.class);
             Root<Role> roleRoot = query.from(Role.class);
             query.select(roleRoot)
-                    .where(cb.like(roleRoot.get("roleName"), roleName));
+                    .where(cb.equal(roleRoot.get("roleName"), roleNameEnum));
             return session.createQuery(query).uniqueResult();
         } catch (Exception e) {
             throw new DataProcessingException("Can't find role with roleName " + roleName, e);

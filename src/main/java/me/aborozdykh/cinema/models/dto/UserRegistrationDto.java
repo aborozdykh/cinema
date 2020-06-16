@@ -1,6 +1,5 @@
 package me.aborozdykh.cinema.models.dto;
 
-
 import me.aborozdykh.cinema.annotations.EmailConstraint;
 import me.aborozdykh.cinema.annotations.PasswordComplexityConstraint;
 import me.aborozdykh.cinema.annotations.PasswordsMatch;
