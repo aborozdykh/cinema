@@ -18,7 +18,6 @@ import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -60,36 +59,8 @@ public class InjectController {
         roleService.add(Role.of("USER"));
     }
 
-    @GetMapping("/inject")
-    public String inject() throws AuthenticationException {
-        var cinemaHallBlueIce
-                = cinemaHallService.add(new CinemaHall(100, "Blue Ice"));
-        var cinemaHallYellowWarm
-                = cinemaHallService.add(new CinemaHall(200, "Yellow Warm"));
-        var cinemaHallRedHot
-                = cinemaHallService.add(new CinemaHall(300, "Red Hot"));
-
-        var moviePhantomas = movieService.add(new Movie("Phantomas returns",
-                "The best movie about Phantomas"));
-        var movieBatman = movieService.add(new Movie("Batman", "Crazy flying mouse"));
-        var movieHarryPotter = movieService.add(new Movie("Harry Potter",
-                "Magic and nothing else"));
-
-        var movieSessionPhantomas = movieSessionService.add(new MovieSession(moviePhantomas,
-                cinemaHallBlueIce, LocalDateTime.now()));
-        var movieSessionBatman = movieSessionService.add(new MovieSession(movieBatman,
-                cinemaHallYellowWarm, LocalDateTime.now()));
-        var movieSessionHarryPotter = movieSessionService.add(new MovieSession(movieHarryPotter,
-                cinemaHallRedHot, LocalDateTime.now()));
-
-        var nifNif = authenticationService.register("nif-nif@pigs.com", "nif-nif");
-        var nafNaf = authenticationService.register("naf-naf@pigs.com", "naf-naf");
-        var nufNuf = authenticationService.register("nuf-nuf@pigs.com", "nuf-nuf");
-
-        shoppingCartService.addSession(movieSessionPhantomas, nifNif);
-        shoppingCartService.addSession(movieSessionBatman, nafNaf);
-        shoppingCartService.addSession(movieSessionHarryPotter, nufNuf);
-
+    @PostConstruct
+    public void addUserAdmin() {
         var admin = new User();
         admin.setEmail("admin@pigs.com");
         admin.setPassword(passwordEncoder.encode("admin"));
@@ -97,7 +68,58 @@ public class InjectController {
         var userRole = roleService.getRoleByName("USER");
         admin.setRoles(Set.of(adminRole, userRole));
         userService.add(admin);
+    }
 
-        return "Cinema halls, Movies, MovieSessions, Users, Shopping carts was injected";
+    @PostConstruct
+    public void addUsers() throws AuthenticationException {
+        authenticationService.register("nif-nif@pigs.com", "nif-nif");
+        authenticationService.register("naf-naf@pigs.com", "naf-naf");
+        authenticationService.register("nuf-nuf@pigs.com", "nuf-nuf");
+    }
+
+    @PostConstruct
+    public void addCinemaHalls() {
+        cinemaHallService.add(new CinemaHall(100, "Blue Ice"));
+        cinemaHallService.add(new CinemaHall(200, "Yellow Warm"));
+        cinemaHallService.add(new CinemaHall(300, "Red Hot"));
+    }
+
+    @PostConstruct
+    public void addMovies() {
+        movieService.add(new Movie("Phantomas returns", "The best movie about Phantomas"));
+        movieService.add(new Movie("Batman", "Crazy flying mouse"));
+        movieService.add(new Movie("Harry Potter", "Magic and nothing else"));
+    }
+
+    @PostConstruct
+    public void addMovieSessions() {
+        var moviePhantomas = movieService.get(1L);
+        var movieBatman = movieService.get(2L);
+        var movieHarryPotter = movieService.get(3L);
+        var cinemaHallBlueIce = cinemaHallService.get(1L);
+        var cinemaHallYellowWarm = cinemaHallService.get(2L);
+        var cinemaHallRedHot = cinemaHallService.get(3L);
+
+        movieSessionService.add(new MovieSession(moviePhantomas,
+                cinemaHallBlueIce, LocalDateTime.now()));
+        movieSessionService.add(new MovieSession(movieBatman,
+                cinemaHallYellowWarm, LocalDateTime.now()));
+        movieSessionService.add(new MovieSession(movieHarryPotter,
+                cinemaHallRedHot, LocalDateTime.now()));
+    }
+
+    @PostConstruct
+    public void addShoppingCarts() {
+        var nifNif = userService.findByEmail("nif-nif@pigs.com");
+        var nafNaf = userService.findByEmail("naf-naf@pigs.com");
+        var nufNuf = userService.findByEmail("nuf-nuf@pigs.com");
+
+        var movieSessionPhantomas = movieSessionService.get(1L);
+        var movieSessionBatman = movieSessionService.get(2L);
+        var movieSessionHarryPotter = movieSessionService.get(3L);
+
+        shoppingCartService.addSession(movieSessionPhantomas, nifNif);
+        shoppingCartService.addSession(movieSessionBatman, nafNaf);
+        shoppingCartService.addSession(movieSessionHarryPotter, nufNuf);
     }
 }

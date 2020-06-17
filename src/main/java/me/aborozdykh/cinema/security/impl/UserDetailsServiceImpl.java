@@ -23,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         var user = userService.findByEmail(username);
         UserBuilder builder;
         if (user != null) {
