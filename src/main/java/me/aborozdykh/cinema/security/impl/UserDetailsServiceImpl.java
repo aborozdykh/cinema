@@ -35,9 +35,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     .map(Enum::name)
                     .toArray(String[]::new);
             builder.roles(roles);
-        } else {
-            throw new UsernameNotFoundException("User not found");
+            return builder.build();
         }
-        return builder.build();
+        throw new UsernameNotFoundException("User not found");
     }
 }
