@@ -1,34 +1,39 @@
 package me.aborozdykh.cinema.security.impl;
 
+import java.util.Set;
 import me.aborozdykh.cinema.exceptions.AuthenticationException;
 import me.aborozdykh.cinema.models.User;
 import me.aborozdykh.cinema.security.AuthenticationService;
+import me.aborozdykh.cinema.service.RoleService;
 import me.aborozdykh.cinema.service.ShoppingCartService;
 import me.aborozdykh.cinema.service.UserService;
-import me.aborozdykh.cinema.util.HashUtilService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
-    private final HashUtilService hashUtilService;
+    private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
     @Autowired
     public AuthenticationServiceImpl(
             UserService userService,
             ShoppingCartService shoppingCartService,
-            HashUtilService hashUtilService) {
+            PasswordEncoder passwordEncoder,
+            RoleService roleService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
-        this.hashUtilService = hashUtilService;
+        this.passwordEncoder = passwordEncoder;
+        this.roleService = roleService;
     }
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
         var user = userService.findByEmail(email);
-        if (user.getPassword().equals(hashUtilService.hashPassword(password, user.getSalt()))) {
+        if (passwordEncoder.matches(password, user.getPassword())) {
             return user;
         }
         throw new AuthenticationException("Enter valid login and password.");
@@ -38,10 +43,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public User register(String email, String password) throws AuthenticationException {
         var user = new User();
         user.setEmail(email);
-        byte[] salt = hashUtilService.getSalt();
-        user.setSalt(salt);
-        String hashPassword = hashUtilService.hashPassword(password, salt);
-        user.setPassword(hashPassword);
+        user.setPassword(passwordEncoder.encode(password));
+        var role = roleService.getRoleByName("USER");
+        user.setRoles(Set.of(role));
         var userFromDb = userService.add(user);
         shoppingCartService.registerNewShoppingCart(userFromDb);
         return userFromDb;

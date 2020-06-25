@@ -1,6 +1,6 @@
 package me.aborozdykh.cinema.service;
 
-public interface GenericService<T> {
+public interface AbstractService<T> {
     T add(T t);
 
     T get(Long id);
