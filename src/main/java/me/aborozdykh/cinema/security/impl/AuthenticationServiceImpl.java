@@ -31,15 +31,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User login(String email, String password) throws AuthenticationException {
-        var user = userService.findByEmail(email);
-        if (passwordEncoder.matches(password, user.getPassword())) {
-            return user;
-        }
-        throw new AuthenticationException("Enter valid login and password.");
-    }
-
-    @Override
     public User register(String email, String password) throws AuthenticationException {
         var user = new User();
         user.setEmail(email);
